@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Navbar.css";
 
@@ -21,13 +21,13 @@ const Navbar = () => {
     <nav id="navbar">
       <h2>
         <Link to="/">
-          <BiCameraMovie /> Review
+          <BiCameraMovie id="cam" /> Review
         </Link>
       </h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Busque um filme"
+          placeholder="Busque um filme ou série"
           onChange={(e) => setSearch(e.target.value)}
           value={search}
         />
@@ -36,6 +36,7 @@ const Navbar = () => {
         </button>
       </form>
     </nav>
+    
   );
 };
 

@@ -24,7 +24,9 @@ const Home = () => {
   console.log(topMovies);
 
   return (
+    
     <div className="container">
+      <h3>Login</h3>
       <h2 className="title">Melhores filmes:</h2>
       <div className="movies-container">
         {topMovies.length > 0 &&

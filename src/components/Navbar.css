@@ -1,12 +1,23 @@
 #navbar {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #121212;
+  background-color: #032541;
 }
 
 #navbar h2 a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+#navbar h3 {
+  color: #eeeeee;
+
+}
+#navbar h3 {
+  margin-right: 100000rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -18,12 +29,16 @@
 }
 
 #navbar input {
+  margin-right: -2.6rem;
+  margin-left: 10rem;
+  width: 30rem;
   padding: 0.2rem 0.8rem;
   border-radius: 4px;
   border: none;
 }
 
 #navbar form button {
+  
   background-color: rgb(8, 106, 233);
   border: 2px solid #eeeeee;
   border-radius: 4px;
@@ -33,4 +48,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+#navbar button {
+  margin-right: 200rem;
 }
