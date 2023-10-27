@@ -1,0 +1,56 @@
+/* Series.css */
+
+.series-page {
+    color: #fff;
+    display: grid;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.series-page svg {
+    font-size: 1.5rem;
+    color: rgb(8, 106, 233);
+}
+
+.series-page .series-card {
+    text-align: center;
+}
+
+.series-page .series-card img,
+.series-page .series-card h2,
+.series-page .series-card p {
+    margin-bottom: 1rem;
+}
+
+.series-page .series-card h2 {
+    font-size: 2rem;
+}
+
+.series-page .series-card p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.tagline {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.info {
+    margin-bottom: 1.5rem;
+}
+
+.info h3 {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.description p {
+    line-height: 1.4rem;
+}
