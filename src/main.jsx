@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import Search from "./pages/Search";
 import Series from "./pages/Series";
-
+import Login from "./pages/Login";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -19,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="movie/:id" element={<Movie />} />
           <Route path="tv/:id" element={<Series />} />
           <Route path="search" element={<Search />} />
+          <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>

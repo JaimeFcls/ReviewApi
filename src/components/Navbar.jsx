@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
+import {  BiSearchAlt2 } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./Navbar.css";
@@ -18,12 +18,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav id="navbar">
-      <h2>
-        <Link to="/">
-          <BiCameraMovie id="cam" /> Review
-        </Link>
-      </h2>
+    <nav id="navbar">  
+      <a href="/">
+        <img src="/logorvw2.png" alt="logo"/>
+      </a>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -33,8 +31,11 @@ const Navbar = () => {
         />
         <button type="submit">
           <BiSearchAlt2 />
-        </button>
+        </button>      
+        
       </form>
+      <a href="/cadastro">Cadastre-se</a>
+      <a href="/login">Login</a>
     </nav>
     
   );

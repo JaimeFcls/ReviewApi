@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import SeriesCard from "../components/SeriesCard";
-
+import "./Home.css"
 import "./MoviesGrid.css";
 import "./SeriesGrid.css";
 
@@ -38,12 +38,10 @@ const Home = () => {
     getPopularSeries();
   }, []);
 
-  return (
-    
-    <div className="container">
+  return (   
+    <div className="home-container">
       <h2 className="title">Filmes Populares:</h2>
-      <h3>Login</h3>
-      <h2 className="title">Melhores filmes:</h2>
+   
       <div className="movies-container">
         {popularMovies.length > 0 &&
           popularMovies.map((movie) => (

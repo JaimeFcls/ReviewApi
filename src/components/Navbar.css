@@ -1,10 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:wght@600;800&display=swap');
+*{
+  font-family: "Poppins", sans-serif;
+}
 #navbar {
-  width: 100%;
+  width: 1793px;
+  height: 80px;
   display: flex;
-  justify-content: space-between;
+  justify-content:safe;
   align-items: center;
   padding: 1rem 2rem;
   background-color: #032541;
+  
+}
+#navbar img {
+  margin-left: 75px;
 }
 
 #navbar h2 a {
@@ -26,12 +35,13 @@
 #navbar form {
   display: flex;
   gap: 0.5rem;
+  width: 1680px;
 }
 
 #navbar input {
   margin-right: -2.6rem;
-  margin-left: 10rem;
-  width: 30rem;
+  margin-left: 20rem;
+  width: 120rem;
   padding: 0.2rem 0.8rem;
   border-radius: 4px;
   border: none;
@@ -49,6 +59,12 @@
   align-items: center;
   cursor: pointer;
 }
+#navbar a{
+  margin-right: -220px;
+  color: #eeeeee;
+}
+
 #navbar button {
-  margin-right: 200rem;
+  margin-right: 50rem;
+  
 }
