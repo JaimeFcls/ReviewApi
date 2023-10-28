@@ -12,7 +12,7 @@ const SeriesCard = ({ series, showLink = true }) => {
       <p>
         <FaStar /> {series.vote_average}
       </p>
-      {showLink && <Link to={`/series/${series.id}`}>Detalhes</Link>}
+      {showLink && <Link to={`/tv/${series.id}`}>Detalhes</Link>}
     </div>
   );
 };
