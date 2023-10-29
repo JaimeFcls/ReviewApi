@@ -8,7 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ionic/react": "^7.5.2",
     "axios": "^1.5.0",
+    "ionicons": "^7.2.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.11.0",

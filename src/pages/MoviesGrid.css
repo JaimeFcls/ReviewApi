@@ -7,7 +7,7 @@
 }
 
 .title .query-text {
-  color: rgb(8, 106, 233);
+  color: rgb(7, 20, 37);
 }
 
 .movies-container {
@@ -21,7 +21,7 @@
 
 .movies-container div {
   width: 29%;
-  color: #fff;
+  color: #000000;
   margin-bottom: 2.5rem;
   display: flex;
   flex-direction: column;

@@ -8,6 +8,7 @@ import Movie from "./pages/Movie";
 import Search from "./pages/Search";
 import Series from "./pages/Series";
 import Login from "./pages/Login";
+import Cadastro from "./pages/Cadastro";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="tv/:id" element={<Series />} />
           <Route path="search" element={<Search />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Cadastro />} />
         </Route>
       </Routes>
     </BrowserRouter>

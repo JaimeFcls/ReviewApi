@@ -9,7 +9,7 @@
   justify-content: safe;
   align-items: center;
   padding: 1rem 2rem;
-  background: linear-gradient(to right, #4aa4ee, #347db9);
+  background: linear-gradient(to right,#347db9, #4aa4ee);
 }
 #navbar img {
   margin-left: 75px;
@@ -48,9 +48,10 @@
 
 #navbar form button {
   
-  background-color: rgb(8, 106, 233);
+  background-color: #ffffff;
   border: 2px solid #eeeeee;
-  border-radius: 4px;
+  width: 80px;
+  border-radius: 6px;
   color: #000;
   padding: 0.3rem;
   font-size: 1.3rem;
@@ -64,6 +65,6 @@
 }
 
 #navbar button {
-  margin-right: 50rem;
+  margin-right: 40rem;
   
 }
