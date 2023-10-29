@@ -40,18 +40,21 @@ const Home = () => {
 
   return (   
     <div className="home-container">
-      <h2 className="title">Filmes Populares:</h2>
-   
+      <h2 className="title">Filmes Populares</h2>
+      <hr />
       <div className="movies-container">
         {popularMovies.length > 0 &&
-          popularMovies.map((movie) => (
+          popularMovies.slice(0, 18).map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
       </div>
-      <h2 className="title">Séries Populares:</h2>
+
+      <h2 className="title">Séries Populares</h2>
+      <hr />
+
       <div className="series-container">
         {popularSeries.length > 0 &&
-          popularSeries.map((series) => (
+          popularSeries.slice(0, 18).map((series) => (
             <SeriesCard key={series.id} series={series} />
           ))}
       </div>

@@ -8,7 +8,7 @@ const SeriesCard = ({ series, showLink = true }) => {
   return (
     <div className="series-card">
       <img src={imagesURL + series.poster_path} alt={series.name} />
-      <h2>{series.name}</h2>
+      <h3>{series.name}</h3>
       <p>
         <FaStar /> {series.vote_average}
       </p>

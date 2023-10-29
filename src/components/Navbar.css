@@ -6,11 +6,10 @@
   width: 1837px;
   height: 80px;
   display: flex;
-  justify-content:safe;
+  justify-content: safe;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #032541;
-  
+  background: linear-gradient(to right, #4aa4ee, #347db9);
 }
 #navbar img {
   margin-left: 75px;
