@@ -20,7 +20,6 @@
 
 .series-container div {
     width: 29%;
-    
     margin-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
@@ -47,12 +46,12 @@
 }
 
 .series-container div a {
-    background-color: rgb(8, 106, 233);
-    border: 2px solid rgb(98, 152, 223);
-    border-radius: 4px;
+    background-color: transparent;
     color: #ffffff;
-    padding: 1rem 0.5rem;
     text-align: center;
     font-weight: bold;
 }
-
+.series-container div a:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}

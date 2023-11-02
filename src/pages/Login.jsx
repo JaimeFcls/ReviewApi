@@ -1,28 +1,15 @@
 import React, { useState, useContext, useEffect } from "react"; // Adicione useEffect aqui
 import axios from 'axios';
-import { UserContext } from '../components/UserContext';
 import "./Login.css"
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-    const { user, setUser } = useContext(UserContext);
 
-    useEffect(() => {
-        if (user) {
-            alert(user.nome); 
-            console.log(user); 
-        }
-    }, [user]); 
 
+  
     const login = () => {
-        axios.post("http://localhost:8082/api/usuario/login", { email, senha })
-            .then((response) => {
-                setUser(response.data); 
-            })
-            .catch((error) => {
-                alert('Erro ao fazer login.');
-            });
+       
     };
 
     // ...

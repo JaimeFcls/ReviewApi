@@ -7,12 +7,17 @@ const imagesURL = import.meta.env.VITE_IMG;
 const MovieCard = ({ movie, showLink = true }) => {
   return (
     <div className="movie-card">
-      <img src={imagesURL + movie.poster_path} alt={movie.title} />
-      <h3>{movie.title}</h3>
+
+      <Link to={`/movie/${movie.id}`}>
+        <img src={imagesURL + movie.poster_path} alt={movie.title} />
+      </Link>
+
+      <Link to={`/movie/${movie.id}`}>
+        <h3>{movie.title}</h3>
+      </Link>
       <p>
-        <FaStar /> {movie.vote_average}
+        <FaStar /> {movie.vote_average }
       </p>
-      {showLink && <Link to={`/movie/${movie.id}`}>Detalhes</Link>}
     </div>
   );
 };

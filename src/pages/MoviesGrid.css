@@ -20,7 +20,7 @@
 }
 
 .movies-container div {
-  width: 29%;
+  width: 27%;
   color: #000000;
   margin-bottom: 2.5rem;
   display: flex;
@@ -48,11 +48,9 @@
 }
 
 .movies-container div a {
-  background-color: rgb(8, 106, 233);
-  border: 2px solid rgb(98, 152, 223);
-  border-radius: 4px;
-  color: #000;
-  padding: 1rem 0.5rem;
+  background-color: transparent;
+  
+  color: #ffffff;
   text-align: center;
   font-weight: bold;
 }
@@ -60,4 +58,9 @@
 .movies-container div a:hover {
   background-color: transparent;
   color: #ffffff;
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+.movies-container p {
+  text-align: center;
 }
