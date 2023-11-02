@@ -13,6 +13,7 @@ import "./Movie.css";
 
 const moviesURL = import.meta.env.VITE_API;
 const apiKey = import.meta.env.VITE_API_KEY;
+const defaultImageURL = './imagempadrao.png'; // Substitua pelo URL da sua imagem padrão
 
 const Movie = () => {
   const { id } = useParams();
@@ -21,6 +22,9 @@ const Movie = () => {
   const getMovie = async (url) => {
     const res = await fetch(url);
     const data = await res.json();
+    if (!data.poster_path) {
+      data.poster_path = defaultImageURL;
+    }
     console.log(data);
     setMovie(data);
   };

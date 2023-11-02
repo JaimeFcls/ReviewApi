@@ -5,6 +5,7 @@ import "./Home.css"
 import "./MoviesGrid.css";
 import "./SeriesGrid.css";
 
+
 const apiKey = "791c3bfe596fc2bb2d59d0d8bafe1367"; // Sua chave de API TMDb
 
 const Home = () => {
