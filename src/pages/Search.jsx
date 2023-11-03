@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import SeriesCard from "../components/SeriesCard";
+import axios from "axios";
 
 const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 const VITE_SEARCH = import.meta.env.VITE_SEARCH;
@@ -14,24 +15,27 @@ import "./Search.css";
 const Search = () => {
   const [searchParams] = useSearchParams();
 
-  const [movies, setMovies] = useState([]);
-  const [series, setSeries] = useState([]);
+  const [results, setResults] = useState([]);
   const query = searchParams.get("q");
 
-  const getSearchedMoviesAndSeries = async (urlMovies, urlSeries) => {
-    const resMovies = await fetch(urlMovies);
-    const dataMovies = await resMovies.json();
-    setMovies(dataMovies.results);
+  const searchTMDb = async (query) => {
+    try {
+      const searchURL = `${import.meta.env.VITE_SEARCH_TV_MULTI}?${import.meta.env.VITE_API_KEY}&query=${query}&language=${import.meta.env.VITE_LANGUAGE}`;
+      const response = await axios.get(searchURL);
 
-    const resSeries = await fetch(urlSeries);
-    const dataSeries = await resSeries.json();
-    setSeries(dataSeries.results);
+      if (response.data && response.data.results) {
+        setResults(response.data.results);
+      }
+    } catch (error) {
+      console.error(error);
+      // Lide com erros aqui, por exemplo, exibindo uma mensagem de erro.
+    }
   };
 
   useEffect(() => {
-    const searchWithQueryURLMovies = `${VITE_SEARCH}?${VITE_API_KEY}&query=${query}&language=${VITE_LANGUAGE}`;
-    const searchWithQueryURLSeries = `${VITE_SEARCH_TV}?${VITE_API_KEY}&query=${query}&language=${VITE_LANGUAGE}`;
-    getSearchedMoviesAndSeries(searchWithQueryURLMovies, searchWithQueryURLSeries);
+    if (query) {
+      searchTMDb(query);
+    }
   }, [query]);
 
   return (
@@ -40,17 +44,18 @@ const Search = () => {
         Resultados para: <span className="query-text">{query}</span>
       </h2>
       <div className="results-container">
-        {movies.length > 0 &&
-          movies.slice(0, 18).map((movie) =>
-            <MovieCard key={movie.id} movie={movie} />
-          )}
-        {series.length > 0 &&
-          series.slice(0, 18).map((serie) =>
-            <SeriesCard key={serie.id} series={serie} />
-          )}
+        {results.length > 0 &&
+          results.slice(0, 18).map((result) => (
+            result.media_type === "movie" ? (
+              <MovieCard key={result.id} movie={result} />
+            ) : (
+              <SeriesCard key={result.id} series={result} />
+            )
+          ))}
       </div>
     </div>
   );
 };
+
 
 export default Search;
