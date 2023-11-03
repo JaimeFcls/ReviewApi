@@ -34,7 +34,7 @@ export default function Login() {
                 setError("Erro ao fazer login. Tente novamente.");
             }
         } catch (error) {
-            setError("Erro ao fazer login. Verifique suas credenciais e tente novamente.");
+            alert("Email ou Senha inválida");
             console.error("Erro ao fazer login:", error);
         }
     };

@@ -1,11 +1,12 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import SeriesCard from "../components/SeriesCard";
-import "./Home.css"
+import "./Home.css";
 import "./MoviesGrid.css";
 import "./SeriesGrid.css";
-
-import {getUser} from "../components/getUser";
+import { getUser } from "../components/getUser";
+import SideBarFilter from "../components/SideBarFilter"; // Importe o novo componente de barra lateral de filtro
 
 const apiKey = "791c3bfe596fc2bb2d59d0d8bafe1367"; // Sua chave de API TMDb
 
@@ -39,27 +40,33 @@ const Home = () => {
     getPopularMovies();
     getPopularSeries();
   }, []);
+
   const user = getUser();
-  return (   
+
+  return (
     <div className="home-container">
-   <h2 className="title">Filmes Populares</h2>
-      <hr />
-      <div className="movies-container">
-        {popularMovies.length > 0 &&
-          popularMovies.slice(0, 18).map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
-      </div>
+      
+      <div className="content-container">
+        <h2 className="title">Filmes Populares</h2>
+        <hr />
+        <div className="movies-container">
+          {popularMovies.length > 0 &&
+            popularMovies.slice(0, 18).map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
+        </div>
 
-      <h2 className="title">Séries Populares</h2>
-      <hr />
+        <h2 className="title">Séries Populares</h2>
+        <hr />
 
-      <div className="series-container">
-        {popularSeries.length > 0 &&
-          popularSeries.slice(0, 18).map((series) => (
-            <SeriesCard key={series.id} series={series} />
-          ))}
+        <div className="series-container">
+          {popularSeries.length > 0 &&
+            popularSeries.slice(0, 18).map((series) => (
+              <SeriesCard key={series.id} series={series} />
+            ))}
+        </div>
       </div>
+      <SideBarFilter /> {/* Renderize o componente SideBarFilter à esquerda da lista de filmes e séries */}
     </div>
   );
 };

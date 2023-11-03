@@ -6,7 +6,6 @@
   width: 1837px;
   height: 80px;
   display: flex;
-  justify-content: safe;
   align-items: center;
   padding: 1rem 2rem;
   background: linear-gradient(to right,#347db9, #4aa4ee);

@@ -46,7 +46,7 @@ const Navbar = () => {
           <p>Olá, {user.nome}</p>
           {/* Adicione o link de logout */}
           <a href="#" onClick={handleLogout}>
-            Logout
+            Sair
           </a>
         </div>
       ) : (

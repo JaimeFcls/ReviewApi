@@ -1,0 +1,42 @@
+.sidebar-filter {
+    background: linear-gradient( #347db9, #4aa4ee);
+    padding: 20px;
+    width: 250px;
+    height: 8300px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    
+    margin-top: 112px;
+    z-index: 1;
+    /* Para garantir que a barra fique acima do conteúdo */
+}
+
+.sidebar-filter h3 {
+    margin-right: 30px;
+    color: white;
+    margin: 0;
+}
+
+.sidebar-filter input {
+    margin: 10px 0;
+    padding: 5px;
+}
+
+.sidebar-filter button {
+    background-color: white;
+    color: blue;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.sidebar-filter button:hover {
+    background-color: lightgray;
+}
+.sidebar-filter a{
+    
+    color: white;
+}

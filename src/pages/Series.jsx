@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import SeriesCard from "../components/SeriesCard"; // 
 import "./Series.css";
 
-const seriesURL = import.meta.env.VITE_API_2; // Certifique-se de que a URL da API esteja correta.
+const seriesURL = import.meta.env.VITE_API_2;
 const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8';
 
 const SeriesDetails = () => {
