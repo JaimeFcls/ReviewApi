@@ -8,6 +8,7 @@ const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 const VITE_SEARCH = import.meta.env.VITE_SEARCH;
 const VITE_SEARCH_TV = import.meta.env.VITE_SEARCH_TV;
 const VITE_LANGUAGE = import.meta.env.VITE_LANGUAGE;
+const defaultImageURL = './imagempadrao.png'; // Substitua pelo URL da sua imagem padrão
 
 import "./MoviesGrid.css";
 import "./Search.css";
@@ -24,7 +25,12 @@ const Search = () => {
       const response = await axios.get(searchURL);
 
       if (response.data && response.data.results) {
-        setResults(response.data.results);
+        setResults(response.data.results.map(result => {
+          if (!result.poster_path) {
+            result.poster_path = defaultImageURL;
+          }
+          return result;
+        }));
       }
     } catch (error) {
       console.error(error);
@@ -56,6 +62,5 @@ const Search = () => {
     </div>
   );
 };
-
 
 export default Search;
