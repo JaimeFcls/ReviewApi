@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {  BiSearchAlt2 } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-
+import { getUser } from "./getUser"
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -16,11 +16,18 @@ const Navbar = () => {
     navigate(`/search?q=${search}`, { replace: true });
     setSearch("");
   };
+  const handleLogout = () => {
+    // Remova os dados do usuário do localStorage
+    localStorage.removeItem("user");
 
+    // Redirecione o usuário para a página de login (ou outra página apropriada)
+    window.location.href = "/login";
+  };
+  const user = getUser();
   return (
-    <nav id="navbar">  
+    <nav id="navbar">
       <a href="/">
-        <img src="/logorvw2.png" alt="logo"/>
+        <img src="/logorvw2.png" alt="logo" />
       </a>
       <form onSubmit={handleSubmit}>
         <input
@@ -31,11 +38,23 @@ const Navbar = () => {
         />
         <button type="submit">
           <BiSearchAlt2 />
-        </button>      
-        
+        </button>
       </form>
-      <a href="/cadastro">Cadastre-se</a>
-      <a href="/login">Login</a>
+      {/* Verifica se o usuário está logado e exibe o nome do usuário se estiver logado */}
+      {user ? (
+        <div className="user-info">
+          <p>Olá, {user.nome}</p>
+          {/* Adicione o link de logout */}
+          <a href="#" onClick={handleLogout}>
+            Logout
+          </a>
+        </div>
+      ) : (
+        <div>
+          <a href="/cadastro">Cadastro</a>
+          <a href="/login">Login</a>
+        </div>
+      )}
     </nav>
     
   );

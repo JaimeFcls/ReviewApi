@@ -4,6 +4,7 @@ import "./MovieCard.css";
 
 const imagesURL = import.meta.env.VITE_IMG;
 
+
 const MovieCard = ({ movie, showLink = true }) => {
   const posterURL = movie.poster_path ? imagesURL + movie.poster_path : './imagempadrao.png';
   return (

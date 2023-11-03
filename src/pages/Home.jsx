@@ -5,6 +5,7 @@ import "./Home.css"
 import "./MoviesGrid.css";
 import "./SeriesGrid.css";
 
+import {getUser} from "../components/getUser";
 
 const apiKey = "791c3bfe596fc2bb2d59d0d8bafe1367"; // Sua chave de API TMDb
 
@@ -38,10 +39,10 @@ const Home = () => {
     getPopularMovies();
     getPopularSeries();
   }, []);
-
+  const user = getUser();
   return (   
     <div className="home-container">
-      <h2 className="title">Filmes Populares</h2>
+   <h2 className="title">Filmes Populares</h2>
       <hr />
       <div className="movies-container">
         {popularMovies.length > 0 &&
