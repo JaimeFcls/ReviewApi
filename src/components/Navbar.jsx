@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
-import { Link, useNavigate } from "react-router-dom";
-import { getUser } from "./getUser"
+import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import { getUser } from "./getUser";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
@@ -40,18 +40,20 @@ const Navbar = () => {
           <BiSearchAlt2 />
         </button>
       </form>
-      {/* Verifica se o usuário está logado e exibe o nome do usuário se estiver logado */}
+      
       {user ? (
+        
         <div className="user-info">
-          <p>Olá, {user.nome}</p>
+         
           {/* Adicione o link de logout */}
-          <a href="#" onClick={handleLogout}>
+         
+          <p style={{color: "#fff"}}>Olá, </p>
+          <a href="/profile" style={{color: "#022b4d"}} >{user.nome}</a>
+          <a style={{color: "#fff"}} onClick={handleLogout}> 
             Sair
           </a>
-          <a href="/Profile">
-            Minha conta
-          </a>
         </div>
+        
       ) : (
         <div>
           <a href="/cadastro">Cadastro</a>

@@ -13,13 +13,11 @@
   background: linear-gradient(to right, #347db9, #4aa4ee);
 }
 
-
-
-#navbar h2 a {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+#navbar img {
+  margin-left: 50px;
 }
+
+
 
 #navbar h3 {
   color: #eeeeee;
@@ -65,12 +63,14 @@
 #navbar a {
   margin-right: -160px;
   color: #eeeeee;
-  gap: 0.5rem;
-
+  cursor: pointer;
 }
-
-
-
+#navbar p {
+  color: #022b4d;
+}
+.teste{
+  color: #000;
+}
 #navbar button {
   margin-right: 40rem;
 
