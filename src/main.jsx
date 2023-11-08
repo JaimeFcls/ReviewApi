@@ -9,6 +9,7 @@ import Search from "./pages/Search";
 import Series from "./pages/Series";
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
+import Profile from "./pages/Profile";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -22,6 +23,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="search" element={<Search />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/profile" element={<Profile />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  BiSearchAlt2 } from "react-icons/bi";
+import { BiSearchAlt2 } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { getUser } from "./getUser"
 import "./Navbar.css";
@@ -48,6 +48,9 @@ const Navbar = () => {
           <a href="#" onClick={handleLogout}>
             Sair
           </a>
+          <a href="/Profile">
+            Minha conta
+          </a>
         </div>
       ) : (
         <div>
@@ -56,7 +59,7 @@ const Navbar = () => {
         </div>
       )}
     </nav>
-    
+
   );
 };
 

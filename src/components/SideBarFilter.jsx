@@ -12,7 +12,7 @@ const SideBarFilter = () => {
         // Coloque sua lógica de filtro aqui
         console.log("Filtrar por: " + filterText);
     };
-
+    
     return (
         <div className="sidebar-filter">
             <h3>Filtro</h3>
@@ -24,7 +24,8 @@ const SideBarFilter = () => {
             <a href="#">Documentário</a>
             <a href="#">Drama</a>
             <a href="#">Família</a>
-            
+            <a href="#">Infantil</a>
+
         </div>
     );
 };
