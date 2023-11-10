@@ -12,7 +12,6 @@ import MovieCard from "../components/MovieCard";
 import "./Movie.css";
 
 const moviesURL = import.meta.env.VITE_API;
-const apiKey = import.meta.env.VITE_API_KEY;
 const defaultImageURL = './imagempadrao.png'; // Substitua pelo URL da sua imagem padrão
 
 const Movie = () => {
@@ -20,7 +19,12 @@ const Movie = () => {
   const [movie, setMovie] = useState(null);
 
   const getMovie = async (url) => {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8',
+      },
+    });
     const data = await res.json();
     if (!data.poster_path) {
       data.poster_path = defaultImageURL;
@@ -37,7 +41,7 @@ const Movie = () => {
   };
 
   useEffect(() => {
-    const movieUrl = `${moviesURL}${id}?${apiKey}`;
+    const movieUrl = `${moviesURL}${id}?language=pt-br`;
     getMovie(movieUrl);
   }, []);
 
