@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { getUser } from "../components/getUser";
 import "./Profile.css";
 
@@ -54,6 +54,7 @@ export default function Profile() {
           <div className="inputbox-profile">
             <input
               type="text"
+              value={nome}
               placeholder={user.nome}
               onChange={e => setNome(e.target.value)}
             />
@@ -62,11 +63,20 @@ export default function Profile() {
           <div className="inputbox-profile">
             <input
               type="email"
+              value={email}
               placeholder={user.email}
               onChange={e => setEmail(e.target.value)}
             />
             <label>Email</label>
           </div>
+          <div className="inputbox-profile">
+              <input
+                type="email"
+                placeholder="Confirmar Email"
+                onChange={e => setConfirmarEmail(e.target.value)} 
+              />
+              <label>Confirmar Email</label>
+            </div>
           <div className="inputbox-profile">
             <input
               type="password"
