@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import { Link, useLocation } from "react-router-dom";
 import { getUser } from "./getUser";
 
 const Navbar = () => {
@@ -42,14 +41,11 @@ const Navbar = () => {
       {user ? (
         
         <div className="user-info">
-         
-          {/* Adicione o link de logout */}
-         
           <p style={{color: "#fff"}}>Olá, </p>
-          <Link to={"/profile"} style={{color: "#022b4d"}} >{user.nome}</Link>
-          <Link style={{color: "#fff"}} onClick={handleLogout}> 
+          <a className="usuario" to={"/profile"} >{user.nome}</a>   
+          <a className="sair" onClick={handleLogout}> 
             Sair
-          </Link>
+          </a>
         </div>
         
       ) : (
@@ -59,8 +55,9 @@ const Navbar = () => {
         </div>
       )}
     </nav>
-
+  
   );
+  
 };
 
 export default Navbar;
