@@ -50,8 +50,8 @@ const Navbar = () => {
         
       ) : (
         <div>
-            <Link to={"/cadastro"}>Cadastro</Link>
-            <Link to={"/login"}>Login</Link>
+            <a className="cadastrar" to={"/cadastro"}>Cadastro</a>
+            <a className="logar" to={"/login"}>Login</a>
         </div>
       )}
     </nav>

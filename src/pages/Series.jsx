@@ -9,20 +9,17 @@ const defaultImageURL = './imagempadrao.png'; // Substitua pelo URL da sua image
 const seriesURL = import.meta.env.VITE_API_2;
 const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JfWTVlOTllMWViMzZlNTc4YjI4NjFjYjI1Zjg5MmQiLCJzdWIiOiI2NGRlYWI3MmI3N2Q0YjExM2ZjNjA1YmQiLCJzY29wZSI6WyJhcGlyX3JlYWQiXSwidmVyc2lvbiI6MX0.mxKXmx5jH0fSMf3mOY_jijsZuzBx_Ef4HgD4AkP36L4';
 
-const SeriesDetails = () => {
+const Series = () => {
     const { id } = useParams();
     const [series, setSeries] = useState(null);
 
-    const getSeries = async () => {
-        const url = `${seriesURL}${id}?language=en-US`;
-        const options = {
-            method: 'GET',
+    const getSeries = async (url) => {
+        const res = await fetch(url, {
             headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${accessToken}`
-            }
-        };
-        const res = await fetch(url, options);
+              accept: 'application/json',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8',
+            },
+          });
         const data = await res.json();
 
         // Verifica se o cartaz está disponível
@@ -41,7 +38,8 @@ const SeriesDetails = () => {
     };
 
     useEffect(() => {
-        getSeries();
+        const seriesURL = `${seriesURL}${id}?language=pt-br` ;
+        getSeries(seriesURL);
     }, []);
 
     return (
@@ -49,7 +47,7 @@ const SeriesDetails = () => {
             {series && (
                 <>
                     <SeriesCard series={series} showLink={false} />
-                    <p className="tagline">{series.tagline}</p>
+                    <p className="tagline">{series.title}</p>
                     <div className="info">
                         <h3>
                             <BsWallet2 /> Primeiro Episódio em :
@@ -80,4 +78,4 @@ const SeriesDetails = () => {
     );
 };
 
-export default SeriesDetails;
+export default Series;

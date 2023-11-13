@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import {
-  BsGraphUp,
-  BsWallet2,
-  BsHourglassSplit,
   BsFillFileEarmarkTextFill,
+  BsGraphUp,
+  BsHourglassSplit,
+  BsWallet2,
 } from "react-icons/bs";
+import { useParams } from "react-router-dom";
 
 import MovieCard from "../components/MovieCard";
 
@@ -51,6 +51,7 @@ const Movie = () => {
         <>
           <MovieCard movie={movie} showLink={false} />
           <p className="tagline">{movie.tagline}</p>
+          
           <div className="info">
             <h3>
               <BsWallet2 /> Orçamento:

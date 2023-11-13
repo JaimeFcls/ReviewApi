@@ -69,10 +69,15 @@
   cursor: pointer;
 }
 #navbar p {
-  margin-left: -200px;
+  margin-left:-200px ;
   color: #022b4d;
 }
-
+#navbar .cadastrar{
+  margin-left: -300px;
+}
+#navbar .logar{
+  margin-left: 35px;
+}
 .teste{
   color: #000;
 }
