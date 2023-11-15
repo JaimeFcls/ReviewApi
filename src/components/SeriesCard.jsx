@@ -9,14 +9,14 @@ const SeriesCard = ({ series }) => {
   const posterURL = series.poster_path ? imagesURL + series.poster_path : defaultImageURL;
 
   return (
-    <div className="movie-card">
+    <div className="series-page">
       <Link to={`/tv/${series.id}`}>
         <img src={posterURL} alt={series.name} />
       </Link>
       <Link to={`/tv/${series.id}`}>
         <h3>{series.name}</h3>
       </Link>
-      <p>
+      <p className="estrela">
         <FaStar /> {series.vote_average}
       </p>
     </div>

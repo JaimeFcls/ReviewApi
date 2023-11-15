@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:wght@600;800&display=swap');
 .movie-page {
-  color: rgb(15, 12, 179);
-  display: grid;
+  color: #086AE9;
+  display: flex;
   flex-direction: column;
   max-width: 600px;
   margin: 2rem auto;
@@ -13,6 +14,34 @@
 
 .movie-page .movie-card {
   text-align: center;
+}
+.movie-back {
+  position: relative;
+  width: 1920px;
+  height: 400px;
+  background-color: black;
+}
+
+.movie-back img {
+  width: 350px;
+  height: 500px;
+  
+}
+
+.movie-poster {
+  position: absolute;
+  width: 350px;
+  left: 100px;
+  top: 80px;
+}
+
+.movie-title {
+  position: absolute;
+  left: 500px;
+  top: 270px;
+  color: white;
+  font-size: 58px;
+  font-family: "Poppins", sans-serif;
 }
 
 .movie-page .movie-card img,
@@ -33,11 +62,23 @@
 }
 
 .tagline {
-  text-align: center;
+  position: absolute;
+  top: 360px;
+  left: 500px;
   font-size: 1.3rem;
   margin-bottom: 2rem;
+  color: #49A2EC;
 }
-
+.sinopse h3{
+  margin-left: 500px;
+  font-size:25px;
+}
+.sinopse p{
+  margin-left: 500px;
+}
+.sinopse {
+  margin-right: 400px;
+}
 .info {
   margin-bottom: 1.5rem;
 }

@@ -46,33 +46,16 @@ const Movie = () => {
   }, []);
 
   return (
-    <div className="movie-page">
+    <div className="movie-back">
+      <img src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`} alt="movie backdrop" style={{ width: '1920px', height: '400px', opacity: "25%" }} />
       {movie && (
         <>
-          <MovieCard movie={movie} showLink={false} />
+          <img className="movie-poster" src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`} alt="movie poster" />
+          <p className="movie-title">{movie.title}</p>
           <p className="tagline">{movie.tagline}</p>
-          
-          <div className="info">
+          <div className="sinopse">
             <h3>
-              <BsWallet2 /> Orçamento:
-            </h3>
-            <p>{formatCurrency(movie.budget)}</p>
-          </div>
-          <div className="info">
-            <h3>
-              <BsGraphUp /> Receita:
-            </h3>
-            <p>{formatCurrency(movie.revenue)}</p>
-          </div>
-          <div className="info">
-            <h3>
-              <BsHourglassSplit /> Duração:
-            </h3>
-            <p>{movie.runtime} minutos</p>
-          </div>
-          <div className="info description">
-            <h3>
-              <BsFillFileEarmarkTextFill /> Descrição:
+               Sinopse
             </h3>
             <p>{movie.overview}</p>
           </div>
@@ -83,3 +66,5 @@ const Movie = () => {
 };
 
 export default Movie;
+
+

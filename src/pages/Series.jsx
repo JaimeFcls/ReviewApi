@@ -16,10 +16,10 @@ const Series = () => {
     const getSeries = async (url) => {
         const res = await fetch(url, {
             headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8',
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8',
             },
-          });
+        });
         const data = await res.json();
 
         // Verifica se o cartaz está disponível
@@ -38,7 +38,7 @@ const Series = () => {
     };
 
     useEffect(() => {
-        const seriesURL = `${seriesURL}${id}?language=pt-br` ;
+        const seriesURL = `https://api.themoviedb.org/3/tv/${id}?language=pt-br`;
         getSeries(seriesURL);
     }, []);
 
@@ -47,7 +47,7 @@ const Series = () => {
             {series && (
                 <>
                     <SeriesCard series={series} showLink={false} />
-                    <p className="tagline">{series.title}</p>
+                    <p className="tagline">{series.tagline}</p>
                     <div className="info">
                         <h3>
                             <BsWallet2 /> Primeiro Episódio em :

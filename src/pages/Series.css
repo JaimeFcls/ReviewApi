@@ -1,18 +1,27 @@
 /* Series.css */
 
 .series-page {
-    color: #fff;
+    color: #086AE9;
     display: grid;
     flex-direction: column;
     max-width: 600px;
     margin: 2rem auto;
+    
+   
 }
-
+.series-page h3 {
+    text-align: center;
+}
+.series-page p {
+    text-align: start;
+}
 .series-page svg {
     font-size: 1.5rem;
     color: rgb(8, 106, 233);
 }
-
+.series-page .estrela{
+    text-align: center;
+}
 .series-page .series-card {
     text-align: center;
 }
