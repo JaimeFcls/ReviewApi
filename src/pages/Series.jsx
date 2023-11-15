@@ -22,7 +22,7 @@ const Series = () => {
         });
         const data = await res.json();
 
-        // Verifica se o cartaz está disponível
+       
         if (!data.poster_path) {
             data.poster_path = defaultImageURL;
         }
@@ -43,35 +43,23 @@ const Series = () => {
     }, []);
 
     return (
-        <div className="series-page">
+        <div className="series-back">
+            <img src={`https://image.tmdb.org/t/p/w500${series?.backdrop_path}`} alt="series backdrop" style={{ width: '1920px', height: '400px', opacity: "25%" }} />
             {series && (
                 <>
-                    <SeriesCard series={series} showLink={false} />
+                    <img className="series-poster" src={`https://image.tmdb.org/t/p/w500${series?.poster_path}`} alt="series poster" />
+                    <p className="series-title">{series.name}</p>
                     <p className="tagline">{series.tagline}</p>
-                    <div className="info">
+                    <div className="sinopse">
                         <h3>
-                            <BsWallet2 /> Primeiro Episódio em :
-                        </h3>
-                        <p>{series.first_air_date}</p>
-                    </div>
-                    <div className="info">
-                        <h3>
-                            <BsGraphUp /> Último Episódio em :
-                        </h3>
-                        <p>{series.last_air_date}</p>
-                    </div>
-                    <div className="info">
-                        <h3>
-                            <BsHourglassSplit /> Episódios:
-                        </h3>
-                        <p>{series.number_of_episodes} Episódios e {series.number_of_seasons} Temporadas </p>
-                    </div>
-                    <div className="info description">
-                        <h3>
-                            <BsFillFileEarmarkTextFill /> Descrição:
+                            Sinopse
                         </h3>
                         <p>{series.overview}</p>
+
+                        &nbsp;
+                        <p>Lançado em : {new Date(series.first_air_date).toLocaleDateString('pt-BR')}</p>
                     </div>
+
                 </>
             )}
         </div>
@@ -79,3 +67,4 @@ const Series = () => {
 };
 
 export default Series;
+

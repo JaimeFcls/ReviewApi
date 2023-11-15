@@ -58,6 +58,22 @@ const Movie = () => {
                Sinopse
             </h3>
             <p>{movie.overview}</p>
+            &nbsp;
+            <p>Lançado em : {new Date(movie.release_date).toLocaleDateString('pt-BR')}</p>
+          </div>
+          <div className="comments">
+            <h3>Comentários</h3>
+            {comments.map((comment, index) => (
+              <p key={index}>{comment}</p>
+            ))}
+            {user ? (
+              <form onSubmit={handleCommentSubmit}>
+                <input name="comment" type="text" placeholder="Adicione um comentário..." required />
+                <button type="submit">Enviar</button>
+              </form>
+            ) : (
+              <p>Você precisa estar logado para comentar.</p>
+            )}
           </div>
         </>
       )}

@@ -3,8 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const imagesURL = import.meta.env.VITE_IMG;
-const defaultImageURL = './imagempadrao.png'; // Substitua pelo URL da sua imagem padrão
-
+const defaultImageURL = '/imagempadrao.png';
 const SeriesCard = ({ series }) => {
   const posterURL = series.poster_path ? imagesURL + series.poster_path : defaultImageURL;
 

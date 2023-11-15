@@ -9,6 +9,33 @@
     
    
 }
+.series-back {
+    position: relative;
+    width: 1920px;
+    height: 400px;
+    background-color: black;
+}
+
+.series-back img {
+    width: 350px;
+    height: 500px;
+    
+}
+
+.series-poster {
+    position: absolute;
+    width: 350px;
+    left: 100px;
+    top: 80px;
+}
+
+.series-title {
+    position: absolute;
+    font-size: 58px;
+    left: 500px;
+    top: 270px;
+    color: white;
+}
 .series-page h3 {
     text-align: center;
 }

@@ -8,7 +8,7 @@ const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 const VITE_SEARCH = import.meta.env.VITE_SEARCH;
 const VITE_SEARCH_TV = import.meta.env.VITE_SEARCH_TV;
 const VITE_LANGUAGE = import.meta.env.VITE_LANGUAGE;
-const defaultImageURL = './imagempadrao.png'; // Substitua pelo URL da sua imagem padrão
+const defaultImageURL = './imagempadrao.png'; 
 
 import "./MoviesGrid.css";
 import "./Search.css";
@@ -34,7 +34,7 @@ const Search = () => {
       }
     } catch (error) {
       console.error(error);
-      // Lide com erros aqui, por exemplo, exibindo uma mensagem de erro.
+      
     }
   };
 
