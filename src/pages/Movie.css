@@ -19,7 +19,7 @@
   position: relative;
   width: 1920px;
   height: 400px;
-  background-color: black;
+  background-color: rgb(8, 106, 233);
 }
 
 .movie-back img {
@@ -70,7 +70,7 @@
   left: 500px;
   font-size: 1.3rem;
   margin-bottom: 2rem;
-  color: #49A2EC;
+  color: #010f1a;
 }
 .sinopse h3{
   margin-left: 500px;

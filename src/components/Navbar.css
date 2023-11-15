@@ -65,12 +65,15 @@
 }
 #navbar .usuario{
   color: #030202;
-  margin-left: -200px;
+  margin-left: -270px;
   cursor: pointer;
 }
 #navbar p {
   margin-left:-200px ;
   color: #022b4d;
+}
+#navbar .ola{
+  margin-left: -270px;
 }
 #navbar .cadastrar{
   margin-left: -300px;
