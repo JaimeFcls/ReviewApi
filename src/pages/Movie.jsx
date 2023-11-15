@@ -1,22 +1,39 @@
 import { useEffect, useState } from "react";
-import {
-  BsFillFileEarmarkTextFill,
-  BsGraphUp,
-  BsHourglassSplit,
-  BsWallet2,
-} from "react-icons/bs";
 import { useParams } from "react-router-dom";
-
-import MovieCard from "../components/MovieCard";
-
+import { getUser } from "../components/getUser";
 import "./Movie.css";
 
 const moviesURL = import.meta.env.VITE_API;
-const defaultImageURL = './imagempadrao.png'; // Substitua pelo URL da sua imagem padrão
+const defaultImageURL = './imagempadrao.png';
 
 const Movie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [comments, setComments] = useState([]);
+  const user = getUser();
+
+  const handleCommentSubmit = async (event) => {
+    event.preventDefault();
+    const comment = event.target.elements.comment.value;
+    const response = await fetch('http://localhost:8082/api/comentar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        comentar: comment,
+        usuarioId: user.id, // Supondo que o usuário tenha um campo de id
+        movieId: id, // id do filme
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setComments([...comments, data]);
+    } else {
+      console.error('Erro ao enviar comentário:', response.statusText);
+    }
+    event.target.reset();
+  };
 
   const getMovie = async (url) => {
     const res = await fetch(url, {
@@ -31,13 +48,11 @@ const Movie = () => {
     }
     console.log(data);
     setMovie(data);
-  };
 
-  const formatCurrency = (number) => {
-    return number.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "USD",
-    });
+    // Recuperar comentários
+    const commentsRes = await fetch(`http://localhost:8082/api/comentar/${id}`);
+    const commentsData = await commentsRes.json();
+    setComments(commentsData);
   };
 
   useEffect(() => {
@@ -55,16 +70,16 @@ const Movie = () => {
           <p className="tagline">{movie.tagline}</p>
           <div className="sinopse">
             <h3>
-               Sinopse
+              Sinopse
             </h3>
             <p>{movie.overview}</p>
-            &nbsp;
+
             <p>Lançado em : {new Date(movie.release_date).toLocaleDateString('pt-BR')}</p>
           </div>
           <div className="comments">
             <h3>Comentários</h3>
             {comments.map((comment, index) => (
-              <p key={index}>{comment}</p>
+              <p key={index}>{comment.comentar} - {comment.usuario ? comment.usuario.nome : 'Usuário desconhecido'}</p>
             ))}
             {user ? (
               <form onSubmit={handleCommentSubmit}>
@@ -82,5 +97,3 @@ const Movie = () => {
 };
 
 export default Movie;
-
-
