@@ -50,7 +50,7 @@ const Movie = () => {
     setMovie(data);
 
     // Recuperar comentários
-    const commentsRes = await fetch(`http://localhost:8082/api/comentar/${id}`);
+    const commentsRes = await fetch(`http://localhost:8082/api/comentar/filme/${id}`);
     const commentsData = await commentsRes.json();
     setComments(commentsData);
   };
@@ -59,7 +59,6 @@ const Movie = () => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
     getMovie(movieUrl);
   }, []);
-
   return (
     <div className="movie-back">
       <img src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`} alt="movie backdrop" style={{ width: '1920px', height: '400px', opacity: "20%" }} />
@@ -83,8 +82,8 @@ const Movie = () => {
             ))}
             {user ? (
               <form onSubmit={handleCommentSubmit}>
-                <input name="comment" type="text" placeholder="Adicione um comentário..." required />
-                <button type="submit">Enviar</button>
+                <textarea className="comentario" name="comment" type="text" placeholder="Adicione um comentário..." required />
+                <button className="comentar" type="submit">Enviar</button>
               </form>
             ) : (
               <p>Você precisa estar logado para comentar.</p>
