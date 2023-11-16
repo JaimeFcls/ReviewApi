@@ -4,14 +4,14 @@ import "./SideBarFilter.css";
 const SideBarFilter = () => {
     const [filterText, setFilterText] = useState("");
 
-    const handleFilterTextChange = (e) => {
+    /*const handleFilterTextChange = (e) => {
         setFilterText(e.target.value);
     };
 
     const handleFilterClick = () => {
         // Coloque sua lógica de filtro aqui
         console.log("Filtrar por: " + filterText);
-    };
+    };*/
     
     return (
         <div className="sidebar-filter">

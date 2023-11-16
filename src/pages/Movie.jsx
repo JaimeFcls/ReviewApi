@@ -76,10 +76,7 @@ const Movie = () => {
             <p>Lançado em : {new Date(movie.release_date).toLocaleDateString('pt-BR')}</p>
           </div>
           <div className="comments">
-            <h3>Comentários</h3>
-            {comments.map((comment, index) => (
-              <p key={index}>{comment.comentar} - {comment.usuario ? comment.usuario.nome : 'Usuário desconhecido'}</p>
-            ))}
+          <h3>Comentar</h3>
             {user ? (
               <form onSubmit={handleCommentSubmit}>
                 <textarea className="comentario" name="comment" type="text" placeholder="Adicione um comentário..." required />
@@ -88,6 +85,9 @@ const Movie = () => {
             ) : (
               <p>Você precisa estar logado para comentar.</p>
             )}
+            {comments.map((comment, index) => (
+              <p className="falaai" key={index}>{comment.comentar} - {comment.usuario ? comment.usuario.nome : 'Usuário desconhecido'}</p>
+            ))}
           </div>
         </>
       )}

@@ -71,18 +71,13 @@
 }
 .comentario {
     width: 1500px;
-    height: 150px;
+    height: 135px;
     text-align:start;
-    color: #086AE9;
+    color: #212321;
     font-size: 17px;
     position: flex;
 }
-.comentar{
-    background-color: #086AE9;
-    width: 200px;
-    right: 100px;
-    margin-left: 50px;
-}
+
 .tagline {
     text-align: center;
     font-size: 1.3rem;

@@ -19,9 +19,13 @@
   position: relative;
   width: 1920px;
   height: 400px;
-  background-color: rgb(8, 106, 233);
+  background-color: rgb(16, 16, 16);
 }
-
+.comentario{
+  background-color:rgb(182, 194, 206);
+  text-align: start;
+  resize: none;
+}
 .movie-back img {
   width: 350px;
   height: 500px;
@@ -70,7 +74,7 @@
   left: 500px;
   font-size: 1.3rem;
   margin-bottom: 2rem;
-  color: #010f1a;
+  color: #037cd8;
 }
 .sinopse h3{
   margin-left: 500px;
@@ -78,6 +82,7 @@
 }
 .sinopse p{
   margin-left: 500px;
+  
 }
 .sinopse {
   margin-right: 400px;
@@ -95,4 +100,19 @@
 
 .description p {
   line-height: 1.4rem;
+}
+.falaai{
+  color: #037cd8;
+}
+.comments h3{
+  color: rgb(27, 25, 20)
+}
+.comentar{
+  color: white ;
+  background-color: black;
+  width: 200px;
+    right: 100px;
+    margin-left: -220px;
+    margin-bottom: 0px;
+    border-radius: 0%;
 }
