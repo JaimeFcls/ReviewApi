@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import axios from 'axios';
-import { IonIcon } from "@ionic/react";
-import "./Cadastro.css"
+import React, { useState } from "react";
+import "./Cadastro.css";
 
 export default function Cadastro() {
   const [nome, setNome] = useState("");
@@ -13,7 +12,7 @@ export default function Cadastro() {
 
   function validarSenha(senha) {
     if (senha.length < 6) {
-      setPasswordError("A senha deve ter no mínimo 6 caracteres.");
+      alert("A senha deve ter no mínimo 6 caracteres.");
       return false;
     }
     return true;
@@ -33,13 +32,13 @@ export default function Cadastro() {
           window.location.href = "/login"
         })
         .catch((error) => {
-          console.log('Erro ao incluir um cliente.');
+          alert('Email já em utilização');
         });
     } else {
       if (email !== confirmarEmail) {
-        setFormError("Verifique o email digitado.");
+        alert("Verifique o email digitado.");
       } else {
-        setFormError("Por favor, preencha todos os campos corretamente.");
+        alert("Por favor, preencha todos os campos corretamente.");
       }
     }
   }
@@ -89,8 +88,7 @@ export default function Cadastro() {
               />
               <label>Senha</label>
             </div>
-            {passwordError && <p className="error-message">{passwordError}</p>}
-            {formError && <p className="error-message">{formError}</p>}
+            
 
             <button type="button" onClick={salvar}>Cadastrar</button>
             <div className="register">
