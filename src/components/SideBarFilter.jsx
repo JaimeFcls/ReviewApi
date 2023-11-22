@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./SideBarFilter.css";
 
-const SideBarFilter = () => {
-    const [filterText, setFilterText] = useState("");
+const categoriaFilmeUrl = import.meta.env.VITE_CATEGORIA;
+  
+const getCategoriaFilmes = async (url) => {
+    const res = await fetch(url, {
+        headers : {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8',
+        },
+    })
+    useEffect(() => {
+        const categoriaFilmeUrl = `${teste}`
+    })
+}
 
-    /*const handleFilterTextChange = (e) => {
-        setFilterText(e.target.value);
-    };
+    
 
-    const handleFilterClick = () => {
-        // Coloque sua lógica de filtro aqui
-        console.log("Filtrar por: " + filterText);
-    };*/
+
     
     return (
         <div className="sidebar-filter">
