@@ -24,11 +24,9 @@ export default function Login() {
             if (response.status === 200) {
                 console.log("Autenticação bem-sucedida:", response.data);
 
-                // Armazene as informações do usuário no localStorage
                 localStorage.setItem("user", JSON.stringify(response.data));
 
-                // Redirecione para a página inicial (ou qualquer outra página)
-                window.location.href = "/"; // Substitua "/" pela rota desejada
+                window.location.href = "/"; 
 
             } else {
                 setError("Erro ao fazer login. Tente novamente.");

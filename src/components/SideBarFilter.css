@@ -8,10 +8,8 @@
     top: 0;
     display: flex;
     flex-direction: column;
-
     margin-top: 112px;
     z-index: 1;
-    /* Para garantir que a barra fique acima do conteúdo */
 }
 
 .sidebar-filter h3 {

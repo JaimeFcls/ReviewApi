@@ -24,7 +24,7 @@ export default function Profile() {
   }
 
   async function salvar() {
-    if (nome && email && validarSenha(senha)) {
+    if (nome || email && validarSenha(senha)) {
       try {
         const response = await axios.put(`http://localhost:8082/api/usuario/${user.id}`, {
           nome,
@@ -72,6 +72,7 @@ export default function Profile() {
           <div className="inputbox-profile">
               <input
                 type="email"
+                value={email}
                 placeholder="Confirmar Email"
                 onChange={e => setConfirmarEmail(e.target.value)} 
               />
@@ -82,7 +83,7 @@ export default function Profile() {
               type="password"
               onChange={e => {
                 setSenha(e.target.value);
-                setPasswordError(""); // Limpa o erro quando a senha é alterada
+                setPasswordError(""); 
               }}
             />
             <label>Senha</label>

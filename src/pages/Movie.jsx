@@ -22,8 +22,9 @@ const Movie = () => {
       },
       body: JSON.stringify({
         comentar: comment,
-        usuarioId: user.id, // Supondo que o usuário tenha um campo de id
-        movieId: id, // id do filme
+        usuarioId: user.id, 
+        movieId: id, 
+        
       }),
     });
     if (response.ok) {
@@ -49,7 +50,6 @@ const Movie = () => {
     console.log(data);
     setMovie(data);
 
-    // Recuperar comentários
     const commentsRes = await fetch(`http://localhost:8082/api/comentar/filme/${id}`);
     const commentsData = await commentsRes.json();
     setComments(commentsData);
@@ -72,21 +72,23 @@ const Movie = () => {
               Sinopse
             </h3>
             <p>{movie.overview}</p>
-
+            <br></br>
             <p>Lançado em : {new Date(movie.release_date).toLocaleDateString('pt-BR')}</p>
           </div>
           <div className="comments">
           <h3>Comentar</h3>
+          <br></br>
             {user ? (
               <form onSubmit={handleCommentSubmit}>
                 <textarea className="comentario" name="comment" type="text" placeholder="Adicione um comentário..." required />
                 <button className="comentar" type="submit">Enviar</button>
               </form>
             ) : (
-              <p>Você precisa estar logado para comentar.</p>
+              <p>Você precisa estar logado para comentar. <a className="LoginComment" href="/Login">Login</a></p>
+              
             )}
             {comments.map((comment, index) => (
-              <p className="falaai" key={index}>{comment.comentar} - {comment.usuario ? comment.usuario.nome : 'Usuário desconhecido'}</p>
+              <p className="falaai" key={index}>{comment.comentar} - {comment.usuario ? comment.usuario.nome : 'Usuário desconhecido'} </p>
             ))}
           </div>
         </>

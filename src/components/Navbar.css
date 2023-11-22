@@ -62,11 +62,13 @@
 #navbar .sair {
   margin-left: 45px;
   cursor: pointer;
+  color: #fefefe;
 }
 #navbar .usuario{
-  color: #030202;
+  color: #ffffff;
   margin-left: -270px;
   cursor: pointer;
+  text-decoration: none;
 }
 #navbar p {
   margin-left:-200px ;
@@ -74,12 +76,17 @@
 }
 #navbar .ola{
   margin-left: -270px;
+  color: #000;
 }
 #navbar .cadastrar{
   margin-left: -300px;
+  text-decoration: none;
+  color: #eeeeee;
 }
 #navbar .logar{
   margin-left: 35px;
+  text-decoration: none;
+  color: #eeeeee;
 }
 .teste{
   color: #000;

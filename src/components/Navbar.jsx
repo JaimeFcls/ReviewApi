@@ -41,8 +41,8 @@ const Navbar = () => {
       {user ? (
         
         <div className="user-info">
-          <p className="ola" style={{color: "#fff" }}>Olá, </p>
-          <a className="usuario" to={"/profile"} >{user.nome}</a>   
+          <p className="ola">Olá, </p>
+          <a className="usuario" href="/profile" >{user.nome}</a>   
           <a className="sair" onClick={handleLogout}> 
             Sair
           </a>
