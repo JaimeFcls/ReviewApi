@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./SideBarFilter.css";
 
-const categoriaFilmeUrl = import.meta.env.VITE_CATEGORIA;
+const categoriaFilmesUrl = import.meta.env.VITE_CATEGORIA;
+
+const SideBarFilter = () => {
+    
   
-const getCategoriaFilmes = async (url) => {
+    const getCategoriaFilmes = async (url) => {
     const res = await fetch(url, {
         headers : {
             accept: 'application/json',
@@ -11,13 +14,14 @@ const getCategoriaFilmes = async (url) => {
         },
     })
     useEffect(() => {
-        const categoriaFilmeUrl = `${teste}`
-    })
-}
+        const categoriaFilmeUrl = `${categoriaFilmesUrl}`
+        getCategoriaFilmes(categoriaFilmeUrl);
+        
+    }
+        ,console.log(getCategoriaFilmes)
+)
 
-    
-
-
+    };
     
     return (
         <div className="sidebar-filter">
@@ -31,8 +35,10 @@ const getCategoriaFilmes = async (url) => {
             <a href="#">Drama</a>
             <a href="#">Família</a>
             <a href="#">Infantil</a>
+                
 
         </div>
+        
     );
 };
 
