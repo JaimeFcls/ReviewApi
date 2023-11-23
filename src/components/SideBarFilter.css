@@ -1,5 +1,5 @@
 .sidebar-filter {
-    background: linear-gradient(#347db9, #4aa4ee);
+    background: linear-gradient(to right, #347db9, #2e5e86);
     padding: 20px;
     width: 250px;
     height: 8300px;
@@ -15,7 +15,7 @@
 
 .sidebar-filter h3 {
     margin-right: 30px;
-    color: rgb(238, 231, 231);
+    color: rgb(231, 238, 238);
     margin: 10;
     font-style:oblique;
     
@@ -28,7 +28,7 @@
 
 .sidebar-filter button {
     background-color: rgb(255, 255, 255);
-    color: blue;
+    color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
@@ -40,5 +40,6 @@
 
 .sidebar-filter a {
 
-    color: white;
+    color: rgb(255, 255, 255);
+    
 }
