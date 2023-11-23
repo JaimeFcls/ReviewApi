@@ -16,11 +16,14 @@ h5 {
     margin-top: 100px;
 }
 h6 {
-    color: #fff;
+    color: #e4e0e0;
     margin-left:700px;
     font-size: 1em;
 }
-
+.campos {
+color: #e4e0e0;
+margin-left: 800px;
+}
 .inputbox-profile {
     position: relative;
     margin: 30px 0;
@@ -28,7 +31,9 @@ h6 {
     border-bottom: 2px solid #fff;
     margin-left: 750px;
 }
-
+.alterar{
+    
+}
 .inputbox-profile label {
     position: absolute;
     top: 50%;

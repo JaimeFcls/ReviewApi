@@ -10,10 +10,10 @@ import Series from "./pages/Series";
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound"; // Importe a nova página NotFound
 import "./index.css";
-//import Categorias from "./pages/Categorias";
 import CategoryPage from "./pages/CategoryPage";
-import SeriesCategoryPage from "./pages/SeriesCategoryPage"; // Importe a nova página de categoria de séries
+import SeriesCategoryPage from "./pages/SeriesCategoryPage";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -27,8 +27,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/category/movie/:id" element={<CategoryPage />} /> // Adicione 'movie' ao caminho da rota
-          <Route path="/category/tv/:id" element={<SeriesCategoryPage />} /> // Adicione uma nova rota para a página de categoria de séries
+          <Route path="/category/movie/:id" element={<CategoryPage />} />
+          <Route path="/category/tv/:id" element={<SeriesCategoryPage />} />
+          <Route path="*" element={<NotFound />} /> {/* Rota padrão */}
         </Route>
       </Routes>
     </BrowserRouter>

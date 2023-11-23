@@ -6,6 +6,7 @@ import "./Profile.css";
 export default function Profile() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [confirmarEmail, setConfirmarEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
@@ -24,11 +25,24 @@ export default function Profile() {
   }
 
   async function salvar() {
-    if (nome || email && validarSenha(senha)) {
+    let finalEmail = email;
+    let finalNome = nome;
+    if (!email) {
+      finalEmail = user.email;
+    }
+    if (!nome) {
+      finalNome = user.nome;
+    }
+
+    if ((finalNome || (finalEmail && finalEmail === confirmarEmail)) && validarSenha(senha)) {
+      if (email && email !== confirmarEmail) {
+        alert("O email e a confirmação do email não correspondem.");
+        return;
+      }
       try {
         const response = await axios.put(`http://localhost:8082/api/usuario/${user.id}`, {
-          nome,
-          email,
+          nome: finalNome,
+          email: finalEmail,
           senha
         });
         alert("Dados alterados com sucesso, é necessário fazer o login novamente");
@@ -40,6 +54,8 @@ export default function Profile() {
       alert("Por favor, preencha todos os campos.");
     }
   }
+
+
 
   const user = getUser();
 
@@ -70,25 +86,26 @@ export default function Profile() {
             <label>Email</label>
           </div>
           <div className="inputbox-profile">
-              <input
-                type="email"
-                value={email}
-                placeholder="Confirmar Email"
-                onChange={e => setConfirmarEmail(e.target.value)} 
-              />
-              <label>Confirmar Email</label>
-            </div>
+            <input
+              type="email"
+              value={confirmarEmail}
+              placeholder="Confirmar Email"
+              onChange={e => setConfirmarEmail(e.target.value)}
+            />
+            <label>Confirmar Email</label>
+          </div>
           <div className="inputbox-profile">
             <input
               type="password"
+              placeholder='Senha é Obrigatorio'
               onChange={e => {
                 setSenha(e.target.value);
-                setPasswordError(""); 
+                setPasswordError("");
               }}
             />
-            <label>Senha</label>
+            <label>Senha *</label>
           </div>
-          <h6>Preencha todos os campos para alterar os dados</h6>
+          <h6 className='campos'>*Campos Obrigatórios</h6>
           <button style={{ background: "#fff", width: "200px", marginLeft: "800px" }} type="button-1" onClick={salvar}>Alterar</button>
         </div>
       </div>
