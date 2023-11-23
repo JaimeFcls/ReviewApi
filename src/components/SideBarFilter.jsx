@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./SideBarFilter.css";
 
 const SideBarFilter = () => {
@@ -21,10 +22,10 @@ const SideBarFilter = () => {
 
     return (
         <div className="sidebar-filter">
-            <h3>Categorias</h3>
+            <h3>Categorias Filmes:</h3>
             {categories.map(category => (
                 <div key={category.id}>
-                    <a href={`/category/${category.id}`}>{category.name}</a>
+                    <Link to={`/category/${category.id}`}>{category.name}</Link>
                 </div>
             ))}
         </div>

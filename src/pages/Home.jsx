@@ -15,7 +15,7 @@ const Home = () => {
   const [popularSeries, setPopularSeries] = useState([]);
 
   const getPopularMovies = async () => {
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`;
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR`; // Adicione o parâmetro language=pt-BR
     try {
       const res = await fetch(url);
       const data = await res.json();
@@ -26,7 +26,7 @@ const Home = () => {
   };
 
   const getPopularSeries = async () => {
-    const url = `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}`;
+    const url = `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=pt-BR`; // Adicione o parâmetro language=pt-BR
     try {
       const res = await fetch(url);
       const data = await res.json();
@@ -45,7 +45,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      
+
       <div className="content-container">
         <h2 className="title">Filmes Populares</h2>
         <hr />

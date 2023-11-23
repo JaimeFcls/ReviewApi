@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import Profile from "./pages/Profile";
 import "./index.css";
+//import Categorias from "./pages/Categorias";
+import CategoryPage from "./pages/CategoryPage"; 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -24,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/category/:id" element={<CategoryPage />} /> 
         </Route>
       </Routes>
     </BrowserRouter>
