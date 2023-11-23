@@ -84,7 +84,7 @@ const Movie = () => {
                 <button className="comentar" type="submit">Enviar</button>
               </form>
             ) : (
-              <p>Você precisa estar logado para comentar. <a className="LoginComment" href="/Login">Login</a></p>
+                <p>Você precisa estar logado para comentar.  <a className="clique" href="/login">Clique aqui para entrar</a></p>
               
             )}
             {comments.map((comment, index) => (
