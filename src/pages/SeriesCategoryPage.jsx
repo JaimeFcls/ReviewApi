@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import MovieCard from "../components/MovieCard";
-import "./MoviesGrid.css";
+import SeriesCard from "../components/SeriesCard"; 
+import "./SeriesGrid.css"; 
 
-const CategoryPage = () => {
-    const [movies, setMovies] = useState([]);
+const SeriesCategoryPage = () => {
+    const [series, setSeries] = useState([]);
     const [genreName, setGenreName] = useState("");
     const { id: categoryId } = useParams();
 
@@ -17,7 +17,7 @@ const CategoryPage = () => {
             }
         };
 
-        fetch(`https://api.themoviedb.org/3/genre/movie/list?language=pt-BR`, options)
+        fetch(`https://api.themoviedb.org/3/genre/tv/list?language=pt-BR`, options)
             .then(response => response.json())
             .then(response => {
                 const genre = response.genres.find(genre => genre.id === Number(categoryId));
@@ -27,25 +27,23 @@ const CategoryPage = () => {
             })
             .catch(err => console.error(err));
 
-        fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${categoryId}`, options)
+        fetch(`https://api.themoviedb.org/3/discover/tv?with_genres=${categoryId}`, options)
             .then(response => response.json())
-            .then(response => setMovies(response.results))
+            .then(response => setSeries(response.results))
             .catch(err => console.error(err));
     }, [categoryId]);
 
     return (
         <div>
             <br></br>
-
-            <h2 className="CategoriaFilme">Filmes de {genreName}</h2>
-        <div className="movies-container" >
-            
-            {movies.map(movie => (
-                <MovieCard key={movie.id} movie={movie} />
-            ))}
-        </div>
+            <h2 className="CategoriaSerie">Séries de {genreName}</h2>
+            <div className="series-container">
+                {series.map(serie => (
+                    <SeriesCard key={serie.id} series={serie} />
+                ))}
+            </div>
         </div>
     );
 };
 
-export default CategoryPage;
+export default SeriesCategoryPage;

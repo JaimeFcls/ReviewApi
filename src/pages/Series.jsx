@@ -72,6 +72,7 @@ const Series = () => {
                             Sinopse
                         </h3>
                         <p>{series.overview}</p>
+                        <br></br>
 
                         <p>Lançado em : {new Date(series.first_air_date).toLocaleDateString('pt-BR')}</p>
                     </div>
@@ -86,7 +87,7 @@ const Series = () => {
                                 <button className="comentar" type="submit">Enviar</button>
                             </form>
                         ) : (
-                            <p>Você precisa estar logado para comentar.</p>
+                            <p>Você precisa estar logado para comentar.  <a className="clique" href="/login">Clique aqui para entrar</a></p>
                         )}
                     </div>
                 </>

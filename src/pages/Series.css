@@ -13,7 +13,7 @@
     position: relative;
     width: 1920px;
     height: 400px;
-    background-color:rgb(8, 106, 233);
+    background-color:rgb(3, 3, 3);
 }
 
 .series-back img {
@@ -28,7 +28,10 @@
     left: 100px;
     top: 80px;
 }
-
+.clique{
+    color: #086AE9;
+    text-decoration: none;
+}
 .series-title {
     position: absolute;
     font-size: 58px;
