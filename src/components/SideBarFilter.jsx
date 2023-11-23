@@ -2,24 +2,28 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SideBarFilter.css";
 
+const categoriaFilmesUrl = import.meta.env.VITE_CATEGORIA;
+
 const SideBarFilter = () => {
-    const [categories, setCategories] = useState([]);
-
+    
+  
+    const getCategoriaFilmes = async (url) => {
+    const res = await fetch(url, {
+        headers : {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8',
+        },
+    })
     useEffect(() => {
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8'
-            }
-        };
+        const categoriaFilmeUrl = `${categoriaFilmesUrl}`
+        getCategoriaFilmes(categoriaFilmeUrl);
+        
+    }
+        ,console.log(getCategoriaFilmes)
+)
 
-        fetch('https://api.themoviedb.org/3/genre/movie/list?language=pt-BR', options)
-            .then(response => response.json())
-            .then(response => setCategories(response.genres))
-            .catch(err => console.error(err));
-    }, []);
-
+    };
+    
     return (
         <div className="sidebar-filter">
             <h3>Categorias Filmes:</h3>
@@ -29,6 +33,7 @@ const SideBarFilter = () => {
                 </div>
             ))}
         </div>
+        
     );
 };
 

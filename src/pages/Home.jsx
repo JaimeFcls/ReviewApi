@@ -1,14 +1,13 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import SeriesCard from "../components/SeriesCard";
+import SideBarFilter from "../components/SideBarFilter";
+import { getUser } from "../components/getUser";
 import "./Home.css";
 import "./MoviesGrid.css";
 import "./SeriesGrid.css";
-import { getUser } from "../components/getUser";
-import SideBarFilter from "../components/SideBarFilter"; // Importe o novo componente de barra lateral de filtro
 
-const apiKey = "791c3bfe596fc2bb2d59d0d8bafe1367"; // Sua chave de API TMDb
+const apiKey = "791c3bfe596fc2bb2d59d0d8bafe1367";
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -66,7 +65,7 @@ const Home = () => {
             ))}
         </div>
       </div>
-      <SideBarFilter /> {/* Renderize o componente SideBarFilter à esquerda da lista de filmes e séries */}
+      <SideBarFilter /> {}
     </div>
   );
 };

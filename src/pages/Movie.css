@@ -50,6 +50,10 @@
   font-size: 58px;
   font-family: "Poppins", sans-serif;
 }
+.LoginComment{
+  text-decoration: none;
+  color:  #086AE9;
+}
 
 .movie-page .movie-card img,
 .movie-page .movie-card h2,

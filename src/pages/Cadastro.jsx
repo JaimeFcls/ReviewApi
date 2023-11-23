@@ -5,7 +5,7 @@ import "./Cadastro.css";
 export default function Cadastro() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [confirmarEmail, setConfirmarEmail] = useState(""); // Novo estado
+  const [confirmarEmail, setConfirmarEmail] = useState(""); 
   const [senha, setSenha] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [formError, setFormError] = useState("");
@@ -72,7 +72,7 @@ export default function Cadastro() {
                 type="email"
                 placeholder="Confirmar Email"
                 required
-                onChange={e => setConfirmarEmail(e.target.value)} // Atualiza o estado do Confirmar Email
+                onChange={e => setConfirmarEmail(e.target.value)} 
               />
               <label>Confirmar Email</label>
             </div>
@@ -83,7 +83,7 @@ export default function Cadastro() {
                 required
                 onChange={e => {
                   setSenha(e.target.value);
-                  setPasswordError(""); // Limpa o erro quando a senha é alterada
+                  setPasswordError(""); 
                 }}
               />
               <label>Senha</label>

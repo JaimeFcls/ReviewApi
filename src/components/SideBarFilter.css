@@ -8,17 +8,17 @@
     top: 0;
     display: flex;
     flex-direction: column;
-
     margin-top: 112px;
     z-index: 1;
-    /* Para garantir que a barra fique acima do conteúdo */
+   
 }
 
 .sidebar-filter h3 {
     margin-right: 30px;
-    color: whitesmoke;
+    color: rgb(238, 231, 231);
     margin: 10;
-    font-style: oblique;
+    font-style:oblique;
+    
 }
 
 .sidebar-filter input {
@@ -27,7 +27,7 @@
 }
 
 .sidebar-filter button {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     color: blue;
     border: none;
     padding: 5px 10px;
@@ -35,7 +35,7 @@
 }
 
 .sidebar-filter button:hover {
-    background-color: lightgray;
+    background-color: blue;
 }
 
 .sidebar-filter a {

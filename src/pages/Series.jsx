@@ -22,8 +22,8 @@ const Series = () => {
             },
             body: JSON.stringify({
                 comentar: comment,
-                usuarioId: user.id, // Supondo que o usuário tenha um campo de id
-                serieId: id, // id da série
+                usuarioId: user.id, 
+                serieId: id, 
             }),
         });
         if (response.ok) {
