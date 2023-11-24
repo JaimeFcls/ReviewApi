@@ -25,6 +25,9 @@
   background-color:rgb(182, 194, 206);
   text-align: start;
   resize: none;
+  border-radius: 10px;
+  border: 2px solid #050505;
+  padding:10px 10px 10px 10px;
 }
 .movie-back img {
   width: 350px;
@@ -106,17 +109,37 @@
   line-height: 1.4rem;
 }
 .falaai{
-  color: #037cd8;
+  color: #000000;
+  width: 1400px;
+}
+.ComentarioFinal{
+  inline-size: 150px;
+  overflow-wrap: break-word;
+  margin-top: 50px;
+  width: 1500px;
+  background-color:rgb(182, 194, 206);
+  border-radius: 10px;
+  border: 2px solid #037cd8;
+  overflow: hidden;
+  padding:10px 10px 10px 20px; 
 }
 .comments h3{
   color: rgb(27, 25, 20)
 }
+.nomeComment{
+  color: #037cd8;
+  text-align: end;
+  margin-right: 10px;
+}
+.cmt{
+  font-weight: bold;
+  font-size: 18px;
+}
 .comentar{
   color: white ;
-  background-color: black;
+  background-color:#037cd8;
+  border-radius: 30px;
   width: 200px;
     right: 100px;
-    margin-left: -220px;
-    margin-bottom: 0px;
-    border-radius: 0%;
+    margin-left: 1301px;
 }
