@@ -114,7 +114,7 @@
 }
 .ComentarioFinal{
   inline-size: 150px;
-  overflow-wrap: break-word;
+  overflow-wrap:normal;
   margin-top: 50px;
   width: 1500px;
   background-color:rgb(182, 194, 206);
