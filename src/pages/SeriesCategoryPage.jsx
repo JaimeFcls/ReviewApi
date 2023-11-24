@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SeriesCard from "../components/SeriesCard"; 
 import "./SeriesGrid.css"; 
-
+import SideBarFilter from "../components/SideBarFilter";
 const SeriesCategoryPage = () => {
     const [series, setSeries] = useState([]);
     const [genreName, setGenreName] = useState("");
@@ -42,6 +42,7 @@ const SeriesCategoryPage = () => {
                     <SeriesCard key={serie.id} series={serie} />
                 ))}
             </div>
+            <SideBarFilter /> 
         </div>
     );
 };

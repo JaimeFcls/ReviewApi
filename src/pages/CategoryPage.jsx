@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import "./MoviesGrid.css";
+import SideBarFilter from "../components/SideBarFilter";
 
 const CategoryPage = () => {
     const [movies, setMovies] = useState([]);
@@ -44,6 +45,7 @@ const CategoryPage = () => {
                 <MovieCard key={movie.id} movie={movie} />
             ))}
         </div>
+            <SideBarFilter /> 
         </div>
     );
 };
