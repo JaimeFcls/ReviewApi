@@ -25,7 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="tv/:id" element={<Series />} />
           <Route path="search" element={<Search />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/review-novo-web.vercel.app/cadastro" element={<Cadastro />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/category/movie/:id" element={<CategoryPage />} />
           <Route path="/category/tv/:id" element={<SeriesCategoryPage />} />
