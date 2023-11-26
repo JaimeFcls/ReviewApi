@@ -29,7 +29,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/profile" element={<Profile />} />
           <Route path="/category/movie/:id" element={<CategoryPage />} />
           <Route path="/category/tv/:id" element={<SeriesCategoryPage />} />
-          <Route path="*" element={<NotFound />} /> {/* Rota padrão */}
+          <Route path="*" element={<NotFound />} /> 
         </Route>
       </Routes>
     </BrowserRouter>
