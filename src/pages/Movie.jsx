@@ -38,8 +38,8 @@ const Movie = () => {
     if (response.ok) {
       const data = await response.json();
       setComments([...comments, data]);
-      setCommentText(""); // Limpa o campo de comentário após o envio
-      setCharCount(0); // Reinicia o contador de caracteres
+      setCommentText(""); 
+      setCharCount(0); 
     } else {
       console.error('Erro ao enviar comentário:', response.statusText);
     }

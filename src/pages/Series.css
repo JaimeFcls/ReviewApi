@@ -55,7 +55,10 @@
 .series-page .series-card {
     text-align: center;
 }
-
+.lixeira{
+    margin-left: 1475px;
+    cursor: pointer;
+}
 .series-page .series-card img,
 .series-page .series-card h2,
 .series-page .series-card p {
