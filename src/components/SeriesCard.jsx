@@ -4,13 +4,19 @@ import { Link } from "react-router-dom";
 
 const imagesURL = import.meta.env.VITE_IMG;
 const defaultImageURL = '/imagempadrao.png';
+
 const SeriesCard = ({ series }) => {
-  const posterURL = series.poster_path ? imagesURL + series.poster_path : defaultImageURL;
+  const posterURL = series.poster_path ? `${imagesURL}${series.poster_path}` : null;
+  const onError = (e) => {
+    if (e.target.src !== defaultImageURL) {
+      e.target.src = defaultImageURL;
+    }
+  };
 
   return (
     <div className="series-page">
       <Link to={`/tv/${series.id}`}>
-        <img src={posterURL} alt={series.name} />
+        <img style={{width : "324px", height : "486px"}} src={posterURL} alt={series.name} onError={onError} />
       </Link>
       <Link to={`/tv/${series.id}`}>
         <h3>{series.name}</h3>

@@ -1,16 +1,19 @@
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-
 const imagesURL = import.meta.env.VITE_IMG;
 
-
 const MovieCard = ({ movie, showLink = true }) => {
-  const posterURL = movie.poster_path ? imagesURL + movie.poster_path : './imagempadrao.png';
+  const posterURL = movie.poster_path ? `${imagesURL}${movie.poster_path}` : null;
+  const onError = (e) => {
+    if (e.target.src !== 'imagempadrao.png') {
+      e.target.src = 'imagempadrao.png';
+    }
+  };
   return (
-    <div className="movie-card">
+    <div style={{ width: "324px", height: "585px" }} className="movie-card">
       <Link to={`/movie/${movie.id}`}>
-        <img src={posterURL} alt={movie.title} />
+        <img style={{ width: "324px", height: "486px" }} src={posterURL} alt={movie.title} onError={onError} />
       </Link>
       <Link to={`/movie/${movie.id}`}>
         <h3>{movie.title}</h3>
@@ -21,6 +24,5 @@ const MovieCard = ({ movie, showLink = true }) => {
     </div>
   );
 };
-
 
 export default MovieCard;

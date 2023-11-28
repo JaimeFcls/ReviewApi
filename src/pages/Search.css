@@ -23,9 +23,8 @@
 }
 
 .results-container div {
-    width: 27%;
+    
     color: #000000;
-    margin-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -52,7 +51,6 @@
 
 .results-container div a {
     background-color: transparent;
-
     color: #ffffff;
     text-align: center;
     font-weight: bold;

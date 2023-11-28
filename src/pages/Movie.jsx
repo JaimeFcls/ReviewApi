@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
+import { FaRegTrashCan } from "react-icons/fa6";
+
 import "./Movie.css";
 
 const moviesURL = import.meta.env.VITE_API;
@@ -12,6 +14,7 @@ const Movie = () => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [charCount, setCharCount] = useState(0);
+  
   const user = getUser();
 
   const handleCommentChange = (event) => {
@@ -63,6 +66,19 @@ const Movie = () => {
     const commentsData = await commentsRes.json();
     setComments(commentsData);
   };
+  const handleCommentDelete = async (commentId) => {
+    const response = await fetch(`http://localhost:8082/api/comentar/${commentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.ok) {
+      setComments(comments.filter(comment => comment.id !== commentId));
+    } else {
+      console.error('Erro ao excluir comentário:', response.statusText);
+    }
+  };
 
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
@@ -110,6 +126,11 @@ const Movie = () => {
               <div className="ComentarioFinal">
                 <p className="falaai" key={index}>{comment.comentar}</p>
                 <p className="nomeComment"> - {comment.usuario.nome}</p>
+                {user && user.id === comment.usuario.id && (
+                  <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
+                    <FaRegTrashCan />
+                  </div>
+                )}
               </div>
             ))}
           </div>
