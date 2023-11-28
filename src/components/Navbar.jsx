@@ -41,11 +41,11 @@ const Navbar = () => {
       {user ? (
         
         <div className="user-info">
-          <p className="ola" style={{color: "#fff" }}>Olá, </p>
-          <a className="usuario" href="/profile" >{user.nome}</a>   
-          <a className="sair" onClick={handleLogout}> 
-            Sair
-          </a>
+          <p className="ola" style={{ color: "#fff" }}>Olá,<a className="usuario" href="/profile" alt="Perfil">{user.nome}</a> <a className="sair" onClick={handleLogout}> Sair</a> </p>
+            
+          
+            
+          
         </div>
         
       ) : (

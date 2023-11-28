@@ -112,7 +112,7 @@
   color: #000000;
   width: 1400px;
   white-space: pre-wrap;
-  /* Adicionado para preservar a formatação original do texto */
+  
 }
 
 .ComentarioFinal {
@@ -126,7 +126,7 @@
   overflow: hidden;
   padding: 10px 10px 10px 20px;
   white-space: pre-wrap;
-  /* Adicionado para preservar a formatação original do texto */
+ 
 }
 .comments h3{
   color: rgb(27, 25, 20)
