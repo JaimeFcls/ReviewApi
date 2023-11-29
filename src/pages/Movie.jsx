@@ -1,7 +1,9 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
+import { FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
-import { FaRegTrashCan } from "react-icons/fa6";
+
 
 import "./Movie.css";
 
@@ -126,7 +128,8 @@ const Movie = () => {
               <div className="ComentarioFinal">
                 <p className="falaai" key={index}>{comment.comentar}</p>
                 <p className="nomeComment"> - {comment.usuario.nome}</p>
-                {user && user.id === comment.usuario.id && (
+                <p className="dataComment">{moment(comment.data).format('DD/MM/YYYY')}</p>               
+                 {user && user.id === comment.usuario.id && (
                   <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
                     <FaRegTrashCan />
                   </div>
