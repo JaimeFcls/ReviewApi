@@ -1,7 +1,8 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
+import { FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
-import { FaRegTrashCan } from "react-icons/fa6";
 import "./Series.css";
 
 const seriesURL = import.meta.env.VITE_API_2;
@@ -126,6 +127,7 @@ const Series = () => {
                             <div className="ComentarioFinal" key={index}>
                                 <p className="falaai">{comment.comentar}</p>
                                 <p className="nomeComment"> - {comment.usuario.nome}</p>
+                                <p className="dataComment">{moment(comment.data).format('DD/MM/YYYY')}</p> 
                                 {user && user.id === comment.usuario.id && (
                                     <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
                                         <FaRegTrashCan />
