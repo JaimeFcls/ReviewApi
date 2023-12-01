@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
+import { FaReply } from "react-icons/fa";
+
+import axios from "axios";
 
 
 import "./Movie.css";
@@ -14,8 +17,14 @@ const Movie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [comments, setComments] = useState([]);
+  const [replies, setReplies] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [charCount, setCharCount] = useState(0);
+  const [replyingTo, setReplyingTo] = useState(null);
+
+  const handleReplyClick = (commentId) => {
+    setReplyingTo(commentId);
+  };
   
   const user = getUser();
 
@@ -81,6 +90,45 @@ const Movie = () => {
       console.error('Erro ao excluir comentário:', response.statusText);
     }
   };
+  const handleReplyChange = (event) => {
+    const text = event.target.value;
+    if (text.length <= 1500) {
+      setReplyText(text);
+    }
+  };
+
+  const handleReplySubmit = async (event, commentId) => {
+    event.preventDefault();
+    const response = await fetch('http://localhost:8082/api/respostas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        texto: replyText,
+        usuarioId: user.id,
+        comentarioId: commentId,
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setReplies([...replies, data]);
+      setReplyText("");
+    } else {
+      console.error('Erro ao enviar resposta:', response.statusText);
+    }
+  };
+
+  const getReplies = async () => {
+    const response = await fetch(`http://localhost:8082/api/respostas/${id}`);
+    if (response.ok) {
+      const data = await response.json();
+      setReplies(data);
+    } else {
+      console.error('Erro ao recuperar respostas:', response.statusText);
+    }
+  };
+ 
 
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
@@ -125,15 +173,30 @@ const Movie = () => {
               <p className="cmt">Comentarios :</p>
             </div>
             {comments.map((comment, index) => (
-              <div className="ComentarioFinal">
-                <p className="falaai" key={index}>{comment.comentar}</p>
+              <div className="ComentarioFinal" key={index}>
+                <p className="falaai">{comment.comentar}</p>
                 <p className="nomeComment"> - {comment.usuario.nome}</p>
-                <p className="dataComment">{moment(comment.data).format('DD/MM/YYYY')}</p>               
-                 {user && user.id === comment.usuario.id && (
+                <p className="dataComment">{moment(comment.data).format('DD/MM/YYYY')}</p>
+                {user && user.id === comment.usuario.id && (
                   <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
                     <FaRegTrashCan />
                   </div>
                 )}
+                <div className="resposta" onClick={() => handleReplyClick(comment.id)}>
+                  <FaReply />
+                </div>
+                {replyingTo === comment.id && (
+                  <form onSubmit={(event) => handleReplySubmit(event, comment.id)}>
+                    <textarea value={replyText} onChange={handleReplyChange} />
+                    <button type="submit">Enviar</button>
+                  </form>
+                )}
+                {replies.filter(reply => reply.comentario.id === comment.id).map((reply, index) => (
+                  <div className="RespostaFinal" key={index}>
+                    <p className="falaai">{reply.texto}</p>
+                    <p className="nomeReply"> - {reply.usuario.nome}</p>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
