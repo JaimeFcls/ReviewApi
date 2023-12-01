@@ -123,8 +123,8 @@ const Movie = () => {
     }
   };
 
-  const getReplies = async () => {
-    const response = await fetch(`http://localhost:8082/api/respostas/${id}`);
+  const getReplies = async (commentId) => {
+    const response = await fetch(`http://localhost:8082/api/respostas/comentario/${commentId}`);
     if (response.ok) {
       const data = await response.json();
       setReplies(data);
@@ -137,9 +137,10 @@ const Movie = () => {
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
     getMovie(movieUrl);
-    getReplies();
+    comments.forEach(comment => {
+      getReplies(comment.id);
+    });
   }, []);
-
   return (
     <div className="movie-back">
       <img src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`} alt="movie backdrop" style={{ width: '1920px', height: '400px', opacity: "20%" }} />
