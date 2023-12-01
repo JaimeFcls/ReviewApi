@@ -21,6 +21,9 @@ const Movie = () => {
   const [commentText, setCommentText] = useState("");
   const [charCount, setCharCount] = useState(0);
   const [replyingTo, setReplyingTo] = useState(null);
+  const [replyText, setReplyText] = useState("");
+
+
 
   const handleReplyClick = (commentId) => {
     setReplyingTo(commentId);
@@ -114,6 +117,7 @@ const Movie = () => {
       const data = await response.json();
       setReplies([...replies, data]);
       setReplyText("");
+      getReplies(); // Fetch all replies again after a new reply is successfully sent
     } else {
       console.error('Erro ao enviar resposta:', response.statusText);
     }
@@ -133,6 +137,7 @@ const Movie = () => {
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
     getMovie(movieUrl);
+    getReplies();
   }, []);
 
   return (
