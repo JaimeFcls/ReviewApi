@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
-import axios from "axios";
 
 
 import "./Movie.css";
@@ -83,33 +82,6 @@ const Movie = () => {
     }
   };
 
-  const handleResponseSubmit = (e, commentId) => {
-    e.preventDefault();
-
-    // Obter a resposta do campo de entrada
-    const responseText = e.target.elements[0].value;
-
-    // Criar o objeto de resposta
-    const response = {
-      resposta: responseText,
-      usuario: user,  // Supondo que 'user' seja o usuário atualmente logado
-      comentarioId: commentId
-    };
-
-    // Enviar a resposta para o servidor
-    axios.post('/api/resposta/comentario/' + commentId, response)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-
-        // Limpar o campo de entrada
-        e.target.elements[0].value = '';
-
-        // Atualizar a lista de comentários/respostas
-        // ...
-      });
-  }
-
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
     getMovie(movieUrl);
@@ -153,25 +125,14 @@ const Movie = () => {
               <p className="cmt">Comentarios :</p>
             </div>
             {comments.map((comment, index) => (
-              <div className="ComentarioFinal" key={index}>
-                <p className="falaai">{comment.comentar}</p>
+              <div className="ComentarioFinal">
+                <p className="falaai" key={index}>{comment.comentar}</p>
                 <p className="nomeComment"> - {comment.usuario.nome}</p>
-                <p className="dataComment">{moment(comment.data).format('DD/MM/YYYY')}</p>
-                {user && user.id === comment.usuario.id && (
+                <p className="dataComment">{moment(comment.data).format('DD/MM/YYYY')}</p>               
+                 {user && user.id === comment.usuario.id && (
                   <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
                     <FaRegTrashCan />
                   </div>
-                )}
-                <div className="Respostas">
-                  {Array.isArray(comment.respostas) && comment.respostas.map((resposta, index) => (
-                    <p key={index}>{resposta.resposta}</p>
-                  ))}
-                </div>
-                {user && (
-                  <form onSubmit={(e) => handleResponseSubmit(e, comment.id)}>
-                    <input type="text" placeholder="Escreva sua resposta aqui..." />
-                    <button type="submit">Responder</button>
-                  </form>
                 )}
               </div>
             ))}
