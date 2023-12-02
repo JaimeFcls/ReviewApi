@@ -44,7 +44,10 @@
   left: 100px;
   top: 80px;
 }
-
+.titleRespostas{
+  margin-left: 1px;
+  color: #000000;
+}
 .movie-title {
   position: absolute;
   left: 500px;
