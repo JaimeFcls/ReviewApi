@@ -72,7 +72,11 @@
   cursor: pointer;
   text-decoration: none;
 }
-
+.iconSair{
+  color: white;
+  margin-top: -22px;
+  margin-left: -135px;
+}
 #navbar p {
   margin-left:-200px ;
   color: #022b4d;

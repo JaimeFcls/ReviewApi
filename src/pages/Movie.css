@@ -170,7 +170,8 @@
     margin-left: 1280px;
 }
 .lixeira{
-  color: rgb(0, 119, 255);
+  color: rgb(2, 56, 117);
+  
 }
 .dataComment{
   margin-left: 1406px;
@@ -178,4 +179,12 @@
 .resposta{
   width: 17px;
   height: 17px;
+}
+.Editar{
+  color: rgb(2, 56, 117);
+  width: 17px;
+    height: 17px;
+    margin-left: 1450px;
+    margin-top: -25px;
+    cursor: pointer;
 }

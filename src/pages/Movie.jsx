@@ -3,6 +3,7 @@ import { FaReply } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
+import { FaEdit } from "react-icons/fa";
 
 
 
@@ -20,9 +21,11 @@ const Movie = () => {
   const [charCount, setCharCount] = useState(0);
   const [replyingTo, setReplyingTo] = useState(null);
   const [replyText, setReplyText] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editingText, setEditingText] = useState("");
   const [isReplying, setIsReplying] = useState(false);
 
-  
+
   const handleReplyClick = (commentId) => {
     if (replyingTo === commentId) {
       setReplyingTo(null); // fecha a área de texto se já estiver aberta
@@ -30,7 +33,7 @@ const Movie = () => {
       setReplyingTo(commentId); // abre a área de texto se estiver fechada
     }
   };
-  
+
   const user = getUser();
 
   const handleCommentChange = (event) => {
@@ -40,7 +43,7 @@ const Movie = () => {
       setCharCount(text.length);
     }
   };
-  
+
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
@@ -58,8 +61,8 @@ const Movie = () => {
     if (response.ok) {
       const data = await response.json();
       setComments([...comments, data]);
-      setCommentText(""); 
-      setCharCount(0); 
+      setCommentText("");
+      setCharCount(0);
     } else {
       console.error('Erro ao enviar comentário:', response.statusText);
     }
@@ -105,7 +108,34 @@ const Movie = () => {
       setReplyText(text);
     }
   };
-  
+  const handleEditSubmit = async (event) => {
+    event.preventDefault();
+    if (!editingCommentId) {
+      console.error('Erro: editingCommentId é undefined');
+      return;
+    }
+    const response = await fetch(`http://localhost:8082/api/comentar/${editingCommentId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        comentar: editingText,
+        usuarioId: user.id,
+        movieId: id,
+      }),
+    });
+    if (response.ok) {
+      window.location.reload();
+      const data = await response.json();
+      setComments(comments.map(comment => comment.id === editingCommentId ? data : comment));
+      setEditingCommentId(null);
+      setEditingText("");
+
+    } else {
+      console.error('Erro ao editar comentário:', response.statusText);
+    }
+  };
 
   const handleReplySubmit = async (event, commentId) => {
     event.preventDefault();
@@ -124,7 +154,7 @@ const Movie = () => {
       const data = await response.json();
       setReplies([...replies, data]);
       setReplyText("");
-      setReplyingTo(null);
+      setReplyingTo(null); // fecha a área de texto após enviar a resposta
     } else {
       console.error('Erro ao enviar resposta:', response.statusText);
     }
@@ -145,26 +175,27 @@ const Movie = () => {
   };
 
   const handleReplyDelete = async (replyId) => {
-    if (window.confirm('Tem certeza de que deseja excluir esta resposta?')){
-    const response = await fetch(`http://localhost:8082/api/respostas/${replyId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (response.ok) {
-      setReplies(replies.filter(reply => reply.id !== replyId));
-    } else {
-      console.error('Erro ao excluir resposta:', response.statusText);
+    if (window.confirm('Tem certeza de que deseja excluir esta resposta?')) {
+      const response = await fetch(`http://localhost:8082/api/respostas/${replyId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        setReplies(replies.filter(reply => reply.id !== replyId));
+      } else {
+        console.error('Erro ao excluir resposta:', response.statusText);
+      }
     }
-  }
   };
-  
+
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
     getMovie(movieUrl);
     getReplies();
-  }, []);
+    console.log(editingCommentId);
+  }, [editingCommentId]);
   return (
     <div className="movie-back">
       <img src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`} alt="movie backdrop" style={{ width: '1920px', height: '400px', opacity: "20%" }} />
@@ -183,18 +214,18 @@ const Movie = () => {
             <h3>Comentar</h3>
             <br />
             {user ? (
-              <form onSubmit={handleCommentSubmit}>
+              <form onSubmit={(event) => editingCommentId ? handleEditSubmit(event, editingCommentId) : handleCommentSubmit(event)}>
                 <textarea
                   className="comentario"
                   name="comment"
                   type="text"
                   placeholder="Adicione um comentário..."
-                  value={commentText}
-                  onChange={handleCommentChange}
+                  value={editingCommentId ? editingText : commentText}
+                  onChange={editingCommentId ? (event) => setEditingText(event.target.value) : handleCommentChange}
                   required
                 />
                 <div className="char-count">Caracteres restantes: {1500 - charCount}</div>
-                <button className="comentar" type="submit">Enviar</button>
+                <button className="comentar" type="submit">{editingCommentId ? "Editar" : "Enviar"}</button>
               </form>
             ) : (
               <p>Você precisa estar logado para comentar. <a className="clique" href="/login">Clique aqui para entrar</a></p>
@@ -203,14 +234,19 @@ const Movie = () => {
               <p className="cmt">Comentarios :</p>
             </div>
             {comments.map((comment, index) => (
-  <div className="ComentarioFinal" key={index}>
-    <p className="falaai">{comment.comentar}</p>
-    <p className="nomeComment"> - {comment.usuario.nome}</p>
-    {user && user.id === comment.usuario.id && (
-      <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
-        <FaRegTrashCan />
-      </div>
-    )}
+              <div className="ComentarioFinal" key={index}>
+                <p className="falaai">{comment.comentar}</p>
+                <p className="nomeComment"> - {comment.usuario.nome}</p>
+                {user && user.id === comment.usuario.id && (
+                  <div>
+                    <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
+                      <FaRegTrashCan />
+                    </div>
+                    <div onClick={() => { setEditingCommentId(comment.id); setEditingText(comment.comentar); }}>
+                      <FaEdit />
+                    </div>
+                  </div>
+                )}
                 <div className="resposta" onClick={() => handleReplyClick(comment.id)}>
                   <FaReply />
                 </div>
@@ -241,8 +277,8 @@ const Movie = () => {
                     </div>
                   ))
                 }
-  </div>
-))}
+              </div>
+            ))}
           </div>
         </>
       )}

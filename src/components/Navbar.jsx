@@ -3,6 +3,9 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { getUser } from "./getUser";
+import { MdExitToApp } from "react-icons/md";
+
+import { IoExitOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
@@ -42,7 +45,9 @@ const Navbar = () => {
         
         <div className="user-info">
           <p className="ola" style={{ color: "#fff" }}>Olá,<a className="usuario" href="/profile" alt="Perfil">{user.nome}</a> <a className="sair" onClick={handleLogout}> Sair</a> </p>
-            
+            <div className="iconSair">
+            <IoExitOutline />
+            </div>
           
             
           

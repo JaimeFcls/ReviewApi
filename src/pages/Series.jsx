@@ -223,7 +223,7 @@ const Series = () => {
                                             <p className="falaai">{reply.texto}</p>
                                             <p className="nomeReply"> - {reply.usuario.nome}</p>
                                             {user && reply?.usuario && (user.id === reply.usuario.id) && (
-                                                <div className="lixeira" onClick={() => handleReplyDelete(reply.id)}>
+                                                <div className="lixeira2" onClick={() => handleReplyDelete(reply.id)}>
                                                     <FaRegTrashCan />
                                                 </div>
                                             )}
