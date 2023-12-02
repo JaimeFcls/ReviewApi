@@ -29,6 +29,16 @@
   border: 2px solid #050505;
   padding:10px 10px 10px 10px;
 }
+.comentarioResposta{
+  resize: none;
+  background-color: rgb(114, 117, 119);
+  color: white;
+    text-align: start;
+    border-radius: 10px;
+      border: 2px solid #050505;
+      padding: 10px 10px 10px 10px;
+    width: 97%;
+}
 .movie-back img {
   width: 350px;
   height: 500px;
@@ -151,9 +161,21 @@
     right: 100px;
     margin-left: 1301px;
 }
+.enviarResposta{
+  background-color: #037cd8;
+  color:white;
+    border-radius: 10px;
+    width: 200px;
+    right: 100px;
+    margin-left: 1280px;
+}
 .lixeira{
   color: rgb(0, 119, 255);
 }
 .dataComment{
   margin-left: 1406px;
+}
+.resposta{
+  width: 17px;
+  height: 17px;
 }

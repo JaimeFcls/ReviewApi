@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { FaReply } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
 import "./Series.css";
@@ -11,9 +12,21 @@ const Series = () => {
     const { id } = useParams();
     const [series, setSeries] = useState(null);
     const [comments, setComments] = useState([]);
+    const [replies, setReplies] = useState([]);
     const [commentText, setCommentText] = useState("");
     const [charCount, setCharCount] = useState(0);
+    const [replyingTo, setReplyingTo] = useState(null);
+    const [replyText, setReplyText] = useState("");
     const user = getUser();
+
+    const handleReplyClick = (commentId) => {
+        if (replyingTo === commentId) {
+            setReplyingTo(null); // fecha a área de texto se já estiver aberta
+        } else {
+            setReplyingTo(commentId); // abre a área de texto se estiver fechada
+        }
+    };
+
 
     const handleCommentChange = (event) => {
         const text = event.target.value;
@@ -25,16 +38,15 @@ const Series = () => {
 
     const handleCommentSubmit = async (event) => {
         event.preventDefault();
-        const comment = event.target.elements.comment.value;
         const response = await fetch('http://localhost:8082/api/comentar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                comentar: comment,
-                usuarioId: user.id, 
-                serieId: id, 
+                comentar: commentText,
+                usuarioId: user.id,
+                serieId: id,
             }),
         });
         if (response.ok) {
@@ -45,7 +57,6 @@ const Series = () => {
         } else {
             console.error('Erro ao enviar comentário:', response.statusText);
         }
-        event.target.reset();
     };
 
     const getSeries = async (url) => {
@@ -62,12 +73,12 @@ const Series = () => {
         console.log(data);
         setSeries(data);
 
-        // Recuperar comentários
         const commentsRes = await fetch(`http://localhost:8082/api/comentar/serie/${id}`);
         const commentsData = await commentsRes.json();
         setComments(commentsData);
     };
     const handleCommentDelete = async (commentId) => {
+        if (window.confirm('Tem certeza de que deseja excluir este comentário? As respostas obtidas também serão excluidas')){
         const response = await fetch(`http://localhost:8082/api/comentar/${commentId}`, {
             method: 'DELETE',
             headers: {
@@ -79,11 +90,70 @@ const Series = () => {
         } else {
             console.error('Erro ao excluir comentário:', response.statusText);
         }
+        }
     };
 
+    const handleReplyChange = (event) => {
+        const text = event.target.value;
+        if (text.length <= 1500) {
+            setReplyText(text);
+        }
+    };
+    const handleReplySubmit = async (event, commentId) => {
+        event.preventDefault();
+        const response = await fetch('http://localhost:8082/api/respostas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                texto: replyText,
+                usuarioId: user.id,
+                comentarioId: commentId,
+            }),
+        });
+        if (response.ok) {
+            const data = await response.json();
+            setReplies([...replies, data]);
+            setReplyText("");
+            setReplyingTo(null);
+        } else {
+            console.error('Erro ao enviar resposta:', response.statusText);
+        }
+    };
+    const getReplies = async () => {
+        try {
+            const response = await fetch(`http://localhost:8082/api/respostas`);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data)
+                setReplies(data);
+            } else {
+                console.error('Erro ao recuperar respostas:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro ao recuperar respostas:', error);
+        }
+    };
+    const handleReplyDelete = async (replyId) => {
+        if (window.confirm('Tem certeza de que deseja excluir esta resposta?')){
+        const response = await fetch(`http://localhost:8082/api/respostas/${replyId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.ok) {
+            setReplies(replies.filter(reply => reply.id !== replyId));
+        } else {
+            console.error('Erro ao excluir resposta:', response.statusText);
+        }
+    }
+    };
     useEffect(() => {
         const seriesUrl = `${seriesURL}${id}?language=pt-br`;
         getSeries(seriesUrl);
+        getReplies();
     }, []);
     return (
         <div className="series-back">
@@ -131,7 +201,37 @@ const Series = () => {
                                         <FaRegTrashCan />
                                     </div>
                                 )}
+                                <div className="resposta" onClick={() => handleReplyClick(comment.id)}>
+                                    <FaReply />
+                                </div>
+                                {replyingTo === comment.id && (
+                                    <form onSubmit={(event) => handleReplySubmit(event, comment.id)}>
+                                        <div>
+                                            <h6 className="titleRespostas">Responder :</h6>
+                                        </div>
+                                        <textarea className="comentarioResposta" value={replyText} onChange={handleReplyChange} />
+                                        <button className="enviarResposta" type="submit">Enviar</button>
+                                    </form>
+                                )}
+                                <div>
+                                    <h6 className="titleRespostas">Respostas :</h6>
+                                </div>
+                                {replies
+                                    .filter(reply => reply.comentario?.id === comment?.id)
+                                    .map((reply, index) => (
+                                        <div className="RespostaFinal" key={index}>
+                                            <p className="falaai">{reply.texto}</p>
+                                            <p className="nomeReply"> - {reply.usuario.nome}</p>
+                                            {user && reply?.usuario && (user.id === reply.usuario.id) && (
+                                                <div className="lixeira" onClick={() => handleReplyDelete(reply.id)}>
+                                                    <FaRegTrashCan />
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))
+                                }
                             </div>
+                            
                         ))}
                         
                     </div>

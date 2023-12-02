@@ -15,9 +15,7 @@ const Movie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [comments, setComments] = useState([]);
-  const [replies, setReplies] = useState(
-    JSON.parse(localStorage.getItem("replies")) || []
-  );
+  const [replies, setReplies] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [charCount, setCharCount] = useState(0);
   const [replyingTo, setReplyingTo] = useState(null);
@@ -26,7 +24,11 @@ const Movie = () => {
 
   
   const handleReplyClick = (commentId) => {
-    setReplyingTo(commentId);
+    if (replyingTo === commentId) {
+      setReplyingTo(null); // fecha a área de texto se já estiver aberta
+    } else {
+      setReplyingTo(commentId); // abre a área de texto se estiver fechada
+    }
   };
   
   const user = getUser();
@@ -82,18 +84,21 @@ const Movie = () => {
     setComments(commentsData);
   };
   const handleCommentDelete = async (commentId) => {
-    const response = await fetch(`http://localhost:8082/api/comentar/${commentId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (response.ok) {
-      setComments(comments.filter(comment => comment.id !== commentId));
-    } else {
-      console.error('Erro ao excluir comentário:', response.statusText);
+    if (window.confirm('Tem certeza de que deseja excluir este comentário? As respostas obtidas também serão excluidas')) {
+      const response = await fetch(`http://localhost:8082/api/comentar/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        setComments(comments.filter(comment => comment.id !== commentId));
+      } else {
+        console.error('Erro ao excluir comentário:', response.statusText);
+      }
     }
   };
+
   const handleReplyChange = (event) => {
     const text = event.target.value;
     if (text.length <= 1500) {
@@ -117,22 +122,20 @@ const Movie = () => {
     });
     if (response.ok) {
       const data = await response.json();
-      const updatedReplies = [...replies, data];
-      setReplies(updatedReplies);
-      localStorage.setItem("replies", JSON.stringify(updatedReplies));
+      setReplies([...replies, data]);
       setReplyText("");
-      setReplyingTo(null); // fecha a área de texto após enviar a resposta
+      setReplyingTo(null);
     } else {
       console.error('Erro ao enviar resposta:', response.statusText);
     }
   };
-  const getReplies = async (commentId) => {
+  const getReplies = async () => {
     try {
-      const response = await fetch(`http://localhost:8082/api/respostas/${commentId}`);
+      const response = await fetch(`http://localhost:8082/api/respostas`);
       if (response.ok) {
         const data = await response.json();
+        console.log(data)
         setReplies(data);
-        localStorage.setItem("replies", JSON.stringify(data));
       } else {
         console.error('Erro ao recuperar respostas:', response.statusText);
       }
@@ -140,7 +143,9 @@ const Movie = () => {
       console.error('Erro ao recuperar respostas:', error);
     }
   };
+
   const handleReplyDelete = async (replyId) => {
+    if (window.confirm('Tem certeza de que deseja excluir esta resposta?')){
     const response = await fetch(`http://localhost:8082/api/respostas/${replyId}`, {
       method: 'DELETE',
       headers: {
@@ -152,14 +157,13 @@ const Movie = () => {
     } else {
       console.error('Erro ao excluir resposta:', response.statusText);
     }
+  }
   };
   
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
     getMovie(movieUrl);
-    comments.forEach(comment => {
-      getReplies(comment.id);
-    });
+    getReplies();
   }, []);
   return (
     <div className="movie-back">
@@ -205,21 +209,24 @@ const Movie = () => {
     {user && user.id === comment.usuario.id && (
       <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
         <FaRegTrashCan />
-        
       </div>
     )}
-    <div className="resposta" onClick={() => handleReplyClick(comment.id)}>
-      <FaReply />
-    </div>
-    <div>
+                <div className="resposta" onClick={() => handleReplyClick(comment.id)}>
+                  <FaReply />
+                </div>
+
+                {replyingTo === comment.id && (
+                  <form onSubmit={(event) => handleReplySubmit(event, comment.id)}>
+                    <div>
+                      <h6 className="titleRespostas">Responder :</h6>
+                    </div>
+                    <textarea className="comentarioResposta" value={replyText} onChange={handleReplyChange} />
+                    <button className="enviarResposta" type="submit">Enviar</button>
+                  </form>
+                )}
+                <div>
                   <h6 className="titleRespostas">Respostas :</h6>
-    </div>
-    {replyingTo === comment.id && (
-      <form onSubmit={(event) => handleReplySubmit(event, comment.id)}>
-        <textarea className="comentario" value={replyText} onChange={handleReplyChange} />
-        <button type="submit">Enviar</button>
-      </form>
-    )}
+                </div>
                 {replies
                   .filter(reply => reply.comentario?.id === comment?.id)
                   .map((reply, index) => (
