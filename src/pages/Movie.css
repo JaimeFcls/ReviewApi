@@ -127,6 +127,12 @@
   white-space: pre-wrap;
   
 }
+.falaai2 {
+  color: rgb(2, 56, 117);
+  width: 1400px;
+  white-space: pre-wrap;
+
+}
 
 .ComentarioFinal {
   inline-size: 150px;
@@ -187,4 +193,19 @@
     margin-left: 1450px;
     margin-top: -25px;
     cursor: pointer;
+}
+.Editar2 {
+  color: rgb(2, 56, 117);
+  width: 17px;
+  height: 17px;
+  margin-left: 1450px;
+  margin-top: -25px;
+  cursor: pointer;
+}
+.lixeira2{
+  color: rgb(2, 56, 117);
+  margin-left: 98.3%;
+  margin-top: -23px;
+  cursor: pointer;
+  
 }

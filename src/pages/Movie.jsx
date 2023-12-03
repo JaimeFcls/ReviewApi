@@ -88,6 +88,13 @@ const Movie = () => {
   };
   const handleCommentDelete = async (commentId) => {
     if (window.confirm('Tem certeza de que deseja excluir este comentário? As respostas obtidas também serão excluidas')) {
+      // Primeiro, exclua todas as respostas associadas ao comentário
+      const repliesToDelete = replies.filter(reply => reply.comentario?.id === commentId);
+      for (let reply of repliesToDelete) {
+        await handleReplyDelete(reply.id);
+      }
+
+      // Em seguida, exclua o comentário
       const response = await fetch(`http://localhost:8082/api/comentar/${commentId}`, {
         method: 'DELETE',
         headers: {
@@ -101,7 +108,6 @@ const Movie = () => {
       }
     }
   };
-
   const handleReplyChange = (event) => {
     const text = event.target.value;
     if (text.length <= 1500) {
@@ -242,7 +248,7 @@ const Movie = () => {
                     <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
                       <FaRegTrashCan />
                     </div>
-                    <div onClick={() => { setEditingCommentId(comment.id); setEditingText(comment.comentar); }}>
+                    <div className="Editar" onClick={() => { setEditingCommentId(comment.id); setEditingText(comment.comentar); }}>
                       <FaEdit />
                     </div>
                   </div>
@@ -267,11 +273,18 @@ const Movie = () => {
                   .filter(reply => reply.comentario?.id === comment?.id)
                   .map((reply, index) => (
                     <div className="RespostaFinal" key={index}>
-                      <p className="falaai">{reply.texto}</p>
+                      <p className="falaai2">{reply.texto}</p>
                       <p className="nomeReply"> - {reply.usuario.nome}</p>
                       {user && reply?.usuario && (user.id === reply.usuario.id) && (
-                        <div className="lixeira" onClick={() => handleReplyDelete(reply.id)}>
+                        <div>
+                        <div>
+                        </div>
+                        <div className="lixeira2" onClick={() => handleReplyDelete(reply.id)}>
                           <FaRegTrashCan />
+                        </div>
+                          <div className="Editar2">
+                            <FaEdit />
+                          </div>
                         </div>
                       )}
                     </div>
