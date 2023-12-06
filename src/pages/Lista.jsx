@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import MovieCard from '../components/MovieCard'; // Importe o componente MovieCard
+
 const FavoritesPage = () => {
     const [favorites, setFavorites] = useState([]);
-
-    const addToFavorites = async (movieId) => {
-        try {
-            const response = await axios.post('/lista', { movieId });
-            if (response.status === 200) {
-                setFavorites([...favorites, response.data]);
-            }
-        } catch (error) {
-            console.error('Erro ao adicionar aos favoritos', error);
-        }
-    };
 
     useEffect(() => {
         const fetchFavorites = async () => {
@@ -32,12 +23,8 @@ const FavoritesPage = () => {
     return (
         <div>
             <h1>Meus Favoritos</h1>
-            {favorites.map(item => (
-                <div key={item.id}>
-                    <img className="movie-poster" src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="movie poster" />
-                    <h2>{item.title}</h2>
-                    <p>Tipo: {item.type}</p>
-                </div>
+            {favorites.map(movie => (
+                <MovieCard key={movie.id} movie={movie} />
             ))}
         </div>
     );

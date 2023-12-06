@@ -40,7 +40,7 @@ export default function Profile() {
         return;
       }
       try {
-        const response = await axios.put(`https://0215-201-76-103-38.ngrok-free.app/api/usuario/${user.id}`, {
+        const response = await axios.put(`http://localhost:8082/api/usuario/${user.id}`, {
           nome: finalNome,
           email: finalEmail,
           senha
