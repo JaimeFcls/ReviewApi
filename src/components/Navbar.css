@@ -61,7 +61,7 @@
 }
 
 #navbar .sair {
-  margin-left: 45px;
+  margin-left: 35px;
   cursor: pointer;
   color: #fefefe;
 }
@@ -86,6 +86,9 @@
   margin-left: -300px;
   text-decoration: none;
   color: #eeeeee;
+}
+.lista{
+  margin-left: 40px;
 }
 #navbar .logar{
   margin-left: 35px;

@@ -4,7 +4,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
 import { FaEdit } from "react-icons/fa";
-
+import axios from "axios";
 
 
 import "./Movie.css";
@@ -193,6 +193,23 @@ const Movie = () => {
       }
     }
   };
+  const addToFavorites = async () => {
+    const response = await fetch('http://localhost:8082/api/lista', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        movieId: id,
+        usuarioId: user.id,
+      }),
+    });
+    if (response.ok) {
+      alert('Filme adicionado aos favoritos!');
+    } else {
+      console.error('Erro ao adicionar aos favoritos:', response.statusText);
+    }
+  };
 
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
@@ -218,6 +235,8 @@ const Movie = () => {
             <h3>Comentar</h3>
             <br />
             {user ? (
+              <div>
+                <button onClick={() => addToFavorites(movie.id)}>Adicionar aos favoritos</button>
               <form onSubmit={(event) => editingCommentId ? handleEditSubmit(event, editingCommentId) : handleCommentSubmit(event)}>
                 <textarea
                   className="comentario"
@@ -231,6 +250,7 @@ const Movie = () => {
                 <div className="char-count">Caracteres restantes: {1500 - charCount}</div>
                 <button className="comentar" type="submit">{editingCommentId ? "Editar" : "Enviar"}</button>
               </form>
+              </div>
             ) : (
               <p>Você precisa estar logado para comentar. <a className="clique" href="/login">Clique aqui para entrar</a></p>
             )}

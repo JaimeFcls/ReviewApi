@@ -8,6 +8,7 @@ import Movie from "./pages/Movie";
 import Search from "./pages/Search";
 import Series from "./pages/Series";
 import Login from "./pages/Login";
+import Lista from "./pages/Lista";
 import Cadastro from "./pages/Cadastro";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound"; // Importe a nova página NotFound
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/category/movie/:id" element={<CategoryPage />} />
           <Route path="/category/tv/:id" element={<SeriesCategoryPage />} />
           <Route path="*" element={<NotFound />} /> 
+          <Route path="/lista" element={<Lista />} />
         </Route>
       </Routes>
     </BrowserRouter>
