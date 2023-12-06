@@ -41,7 +41,7 @@ const Series = () => {
 
     const handleCommentSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetch('http://localhost:8082/api/comentar', {
+        const response = await fetch('https://0215-201-76-103-38.ngrok-free.app/api/comentar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,13 +76,13 @@ const Series = () => {
         console.log(data);
         setSeries(data);
 
-        const commentsRes = await fetch(`http://localhost:8082/api/comentar/serie/${id}`);
+        const commentsRes = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/comentar/serie/${id}`);
         const commentsData = await commentsRes.json();
         setComments(commentsData);
     };
     const handleCommentDelete = async (commentId) => {
         if (window.confirm('Tem certeza de que deseja excluir este comentário? As respostas obtidas também serão excluidas')){
-        const response = await fetch(`http://localhost:8082/api/comentar/${commentId}`, {
+        const response = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/comentar/${commentId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const Series = () => {
     };
     const handleReplySubmit = async (event, commentId) => {
         event.preventDefault();
-        const response = await fetch('http://localhost:8082/api/respostas', {
+        const response = await fetch('https://0215-201-76-103-38.ngrok-free.app/api/respostas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ const Series = () => {
     };
     const getReplies = async () => {
         try {
-            const response = await fetch(`http://localhost:8082/api/respostas`);
+            const response = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/respostas`);
             if (response.ok) {
                 const data = await response.json();
                 console.log(data)
@@ -144,7 +144,7 @@ const Series = () => {
             console.error('Erro: editingCommentId é undefined');
             return;
         }
-        const response = await fetch(`http://localhost:8082/api/comentar/${editingCommentId}`, {
+        const response = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/comentar/${editingCommentId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ const Series = () => {
     };
     const handleReplyDelete = async (replyId) => {
         if (window.confirm('Tem certeza de que deseja excluir esta resposta?')){
-        const response = await fetch(`http://localhost:8082/api/respostas/${replyId}`, {
+        const response = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/respostas/${replyId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

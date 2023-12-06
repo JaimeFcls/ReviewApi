@@ -47,7 +47,7 @@ const Movie = () => {
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch('http://localhost:8082/api/comentar', {
+    const response = await fetch('https://0215-201-76-103-38.ngrok-free.app/api/comentar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ const Movie = () => {
     console.log(data);
     setMovie(data);
 
-    const commentsRes = await fetch(`http://localhost:8082/api/comentar/filme/${id}`);
+    const commentsRes = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/comentar/filme/${id}`);
     const commentsData = await commentsRes.json();
     setComments(commentsData);
   };
@@ -93,7 +93,7 @@ const Movie = () => {
       for (let reply of repliesToDelete) {
         await handleReplyDelete(reply.id);
       }
-      const response = await fetch(`http://localhost:8082/api/comentar/${commentId}`, {
+      const response = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/comentar/${commentId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ const Movie = () => {
       console.error('Erro: editingCommentId é undefined');
       return;
     }
-    const response = await fetch(`http://localhost:8082/api/comentar/${editingCommentId}`, {
+    const response = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/comentar/${editingCommentId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ const Movie = () => {
 
   const handleReplySubmit = async (event, commentId) => {
     event.preventDefault();
-    const response = await fetch('http://localhost:8082/api/respostas', {
+    const response = await fetch('https://0215-201-76-103-38.ngrok-free.app/api/respostas', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -165,7 +165,7 @@ const Movie = () => {
   };
   const getReplies = async () => {
     try {
-      const response = await fetch(`http://localhost:8082/api/respostas`);
+      const response = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/respostas`);
       if (response.ok) {
         const data = await response.json();
         console.log(data)
@@ -180,7 +180,7 @@ const Movie = () => {
 
   const handleReplyDelete = async (replyId) => {
     if (window.confirm('Tem certeza de que deseja excluir esta resposta?')) {
-      const response = await fetch(`http://localhost:8082/api/respostas/${replyId}`, {
+      const response = await fetch(`https://0215-201-76-103-38.ngrok-free.app/api/respostas/${replyId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -194,7 +194,7 @@ const Movie = () => {
     }
   };
   const addToFavorites = async () => {
-    const response = await fetch('http://localhost:8082/api/lista', {
+    const response = await fetch('https://0215-201-76-103-38.ngrok-free.app/api/lista', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
