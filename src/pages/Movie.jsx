@@ -28,9 +28,9 @@ const Movie = () => {
 
   const handleReplyClick = (commentId) => {
     if (replyingTo === commentId) {
-      setReplyingTo(null); // fecha a área de texto se já estiver aberta
+      setReplyingTo(null); 
     } else {
-      setReplyingTo(commentId); // abre a área de texto se estiver fechada
+      setReplyingTo(commentId); 
     }
   };
 
@@ -88,13 +88,11 @@ const Movie = () => {
   };
   const handleCommentDelete = async (commentId) => {
     if (window.confirm('Tem certeza de que deseja excluir este comentário? As respostas obtidas também serão excluidas')) {
-      // Primeiro, exclua todas as respostas associadas ao comentário
+      
       const repliesToDelete = replies.filter(reply => reply.comentario?.id === commentId);
       for (let reply of repliesToDelete) {
         await handleReplyDelete(reply.id);
       }
-
-      // Em seguida, exclua o comentário
       const response = await fetch(`http://localhost:8082/api/comentar/${commentId}`, {
         method: 'DELETE',
         headers: {
@@ -160,7 +158,7 @@ const Movie = () => {
       const data = await response.json();
       setReplies([...replies, data]);
       setReplyText("");
-      setReplyingTo(null); // fecha a área de texto após enviar a resposta
+      setReplyingTo(null); 
     } else {
       console.error('Erro ao enviar resposta:', response.statusText);
     }

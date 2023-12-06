@@ -72,18 +72,14 @@
   cursor: pointer;
   text-decoration: none;
 }
-.iconSair{
-  color: white;
-  margin-top: -22px;
-  margin-left: -135px;
-}
+
 #navbar p {
   margin-left:-200px ;
   color: #022b4d;
 }
 #navbar .ola{
   margin-left: -320px;
-  margin-top: 7px;
+  margin-top: 5px;
   color: #000;
 }
 #navbar .cadastrar{

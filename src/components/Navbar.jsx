@@ -42,17 +42,12 @@ const Navbar = () => {
       </form>
       
       {user ? (
-        
+        <div>
         <div className="user-info">
-          <p className="ola" style={{ color: "#fff" }}>Olá,<a className="usuario" href="/profile" alt="Perfil">{user.nome}</a> <a className="sair" onClick={handleLogout}> Sair</a> </p>
-            <div className="iconSair">
-            <IoExitOutline />
-            </div>
-          
-            
-          
+          <p className="ola" style={{ color: "#fff" }}>Olá,<a className="usuario" href="/profile" alt="Perfil">{user.nome}</a> <a className="sair" onClick={handleLogout}> Sair</a> </p>  
         </div>
-        
+  
+        </div>
       ) : (
         <div>
             <a href="/cadastro" className="cadastrar" >Cadastro</a>

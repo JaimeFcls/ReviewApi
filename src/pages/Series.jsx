@@ -3,6 +3,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { FaReply } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
+import { FaEdit } from "react-icons/fa";
 import "./Series.css";
 
 const seriesURL = import.meta.env.VITE_API_2;
@@ -17,13 +18,15 @@ const Series = () => {
     const [charCount, setCharCount] = useState(0);
     const [replyingTo, setReplyingTo] = useState(null);
     const [replyText, setReplyText] = useState("");
+    const [editingCommentId, setEditingCommentId] = useState(null);
+    const [editingText, setEditingText] = useState("");
     const user = getUser();
 
     const handleReplyClick = (commentId) => {
         if (replyingTo === commentId) {
-            setReplyingTo(null); // fecha a área de texto se já estiver aberta
+            setReplyingTo(null); 
         } else {
-            setReplyingTo(commentId); // abre a área de texto se estiver fechada
+            setReplyingTo(commentId); 
         }
     };
 
@@ -135,6 +138,34 @@ const Series = () => {
             console.error('Erro ao recuperar respostas:', error);
         }
     };
+    const handleEditSubmit = async (event) => {
+        event.preventDefault();
+        if (!editingCommentId) {
+            console.error('Erro: editingCommentId é undefined');
+            return;
+        }
+        const response = await fetch(`http://localhost:8082/api/comentar/${editingCommentId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                comentar: editingText,
+                usuarioId: user.id,
+                movieId: id,
+            }),
+        });
+        if (response.ok) {
+            window.location.reload();
+            const data = await response.json();
+            setComments(comments.map(comment => comment.id === editingCommentId ? data : comment));
+            setEditingCommentId(null);
+            setEditingText("");
+
+        } else {
+            console.error('Erro ao editar comentário:', response.statusText);
+        }
+    };
     const handleReplyDelete = async (replyId) => {
         if (window.confirm('Tem certeza de que deseja excluir esta resposta?')){
         const response = await fetch(`http://localhost:8082/api/respostas/${replyId}`, {
@@ -173,18 +204,18 @@ const Series = () => {
                         <h3>Comentar</h3>
                         <br />
                         {user ? (
-                            <form onSubmit={handleCommentSubmit}>
+                            <form onSubmit={(event) => editingCommentId ? handleEditSubmit(event, editingCommentId) : handleCommentSubmit(event)}>
                                 <textarea
                                     className="comentario"
                                     name="comment"
                                     type="text"
                                     placeholder="Adicione um comentário..."
-                                    value={commentText}
-                                    onChange={handleCommentChange}
+                                    value={editingCommentId ? editingText : commentText}
+                                    onChange={editingCommentId ? (event) => setEditingText(event.target.value) : handleCommentChange}
                                     required
                                 />
                                 <div className="char-count">Caracteres restantes: {1500 - charCount}</div>
-                                <button className="comentar" type="submit">Enviar</button>
+                                <button className="comentar" type="submit">{editingCommentId ? "Editar" : "Enviar"}</button>
                             </form>
                         ) : (
                             <p>Você precisa estar logado para comentar. <a className="clique" href="/login">Clique aqui para entrar</a></p>
@@ -197,13 +228,19 @@ const Series = () => {
                                 <p className="falaai">{comment.comentar}</p>
                                 <p className="nomeComment"> - {comment.usuario.nome}</p>
                                 {user && user.id === comment.usuario.id && (
-                                    <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
-                                        <FaRegTrashCan />
+                                    <div>
+                                        <div className="lixeira" onClick={() => handleCommentDelete(comment.id)}>
+                                            <FaRegTrashCan />
+                                        </div>
+                                        <div className="Editar" onClick={() => { setEditingCommentId(comment.id); setEditingText(comment.comentar); }}>
+                                            <FaEdit />
+                                        </div>
                                     </div>
                                 )}
                                 <div className="resposta" onClick={() => handleReplyClick(comment.id)}>
                                     <FaReply />
                                 </div>
+
                                 {replyingTo === comment.id && (
                                     <form onSubmit={(event) => handleReplySubmit(event, comment.id)}>
                                         <div>
@@ -220,11 +257,18 @@ const Series = () => {
                                     .filter(reply => reply.comentario?.id === comment?.id)
                                     .map((reply, index) => (
                                         <div className="RespostaFinal" key={index}>
-                                            <p className="falaai">{reply.texto}</p>
+                                            <p className="falaai2">{reply.texto}</p>
                                             <p className="nomeReply"> - {reply.usuario.nome}</p>
                                             {user && reply?.usuario && (user.id === reply.usuario.id) && (
-                                                <div className="lixeira2" onClick={() => handleReplyDelete(reply.id)}>
-                                                    <FaRegTrashCan />
+                                                <div>
+                                                    <div>
+                                                    </div>
+                                                    <div className="lixeira2" onClick={() => handleReplyDelete(reply.id)}>
+                                                        <FaRegTrashCan />
+                                                    </div>
+                                                    <div className="Editar2">
+                                                        <FaEdit />
+                                                    </div>
                                                 </div>
                                             )}
                                         </div>
