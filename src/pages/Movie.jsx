@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaEdit, FaReply } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -199,12 +198,19 @@ const Movie = () => {
         return;
       }
   
-      const response = await axios.post('http://localhost:8082/api/lista', {
-        movieId: movieId,
-        usuarioId: usuarioId,
+      const response = await fetch('http://localhost:8082/api/lista', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          movieId: movieId.toString(),
+          usuarioId: usuarioId.toString(),
+        }),
       });
   
-      if (response.status === 200) {
+      if (response.ok) {
+        const data = await response.json();
         alert('Filme adicionado aos favoritos!');
       } else {
         console.error('Erro ao adicionar aos favoritos:', response.statusText);
@@ -239,7 +245,7 @@ const Movie = () => {
             <br />
             {user ? (
               <div>
-                 <button onClick={() => addToFavorites(movie.id, user.id)}>Adicionar aos favoritos</button>
+                <button onClick={() => addToFavorites(movie.id, user.id)}>Adicionar aos favoritos</button>
               <form onSubmit={(event) => editingCommentId ? handleEditSubmit(event, editingCommentId) : handleCommentSubmit(event)}>
                 <textarea
                   className="comentario"
