@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { getUser } from "../components/getUser";
 import './Lista.css';
 
 import MovieCard from '../components/MovieCard'; // Importe o componente MovieCard
@@ -9,6 +10,8 @@ const defaultImageURL = './imagempadrao.png';
 const FavoritesPage = () => {
     const [favorites, setFavorites] = useState([]);
     const [movies, setMovies] = useState([]);
+
+    const user = getUser(); // Obtenha o usuário logado
 
     const getMovie = async (movieId) => {
         const url = `https://api.themoviedb.org/3/movie/${movieId}`;
@@ -31,8 +34,9 @@ const FavoritesPage = () => {
             try {
                 const response = await axios.get('http://localhost:8082/api/lista');
                 if (response.status === 200) {
-                    setFavorites(response.data);
-                    const moviesData = await Promise.all(response.data.map(async (favorite) => {
+                    const userFavorites = response.data.filter(favorite => favorite.usuario && favorite.usuario.id === user.id);
+                    setFavorites(userFavorites);
+                    const moviesData = await Promise.all(userFavorites.map(async (favorite) => {
                         const movieId = favorite.movieId;
                         if (movieId) {
                             return await getMovie(movieId);
