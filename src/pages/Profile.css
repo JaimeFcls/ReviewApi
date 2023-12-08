@@ -3,26 +3,29 @@
 
 
 .form-box-profile {
-    
+    display: flex;
     width: 100%;
     height: 1020px;
     background: transparent;
 
 }
-h5 {
+.olaProfile {
+    text-align: center;
     font-size: 2em;
     color: #fff;
-    margin-left: 800px;
     margin-top: 100px;
+    margin-left: 700px;
 }
-h6 {
+.infoProfile {
+    text-align: center;
     color: #e4e0e0;
     margin-left:700px;
     font-size: 1em;
 }
 .campos {
+    text-align: center;
 color: #e4e0e0;
-margin-left: 800px;
+margin-left: 670px;
 }
 .inputbox-profile {
     position: relative;

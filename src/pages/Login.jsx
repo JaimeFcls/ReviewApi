@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
 import "./Login.css";
 
 export default function Login() {
@@ -19,7 +19,7 @@ export default function Login() {
             data.append("email", email);
             data.append("senha", senha);
 
-            const response = await axios.post("https://0215-201-76-103-38.ngrok-free.app/api/usuario/login", data, config);
+            const response = await axios.post("http://localhost:8082/api/usuario/login", data, config);
 
             if (response.status === 200) {
                 console.log("Autenticação bem-sucedida:", response.data);

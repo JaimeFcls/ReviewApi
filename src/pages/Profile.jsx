@@ -34,7 +34,11 @@ export default function Profile() {
       finalNome = user.nome;
     }
 
-    if ((finalNome || (finalEmail && finalEmail === confirmarEmail)) && validarSenha(senha)) {
+    if (validarSenha(senha)) {
+      if (finalNome && finalNome.length > 21) {
+        alert("O nome não pode conter mais de 20 caracteres.");
+        return;
+      }
       if (email && email !== confirmarEmail) {
         alert("O email e a confirmação do email não correspondem.");
         return;
@@ -51,9 +55,10 @@ export default function Profile() {
         console.error(error);
       }
     } else {
-      alert("Por favor, preencha todos os campos.");
+      alert("Por favor, preencha o campo da senha.");
     }
   }
+
 
 
 
@@ -64,8 +69,8 @@ export default function Profile() {
       <div className="form-box-profile">
         <div className="form-value">
           <form action="">
-            <h5>Olá, {user.nome}</h5>
-            <h6>Aqui você pode editar as informações da sua conta </h6>
+            <h5 className='olaProfile'>Olá, {user.nome}</h5>
+            <h6 className='infoProfile'>Aqui você pode editar as informações da sua conta </h6>
           </form>
           <div className="inputbox-profile">
             <input

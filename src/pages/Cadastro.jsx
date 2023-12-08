@@ -19,7 +19,7 @@ export default function Cadastro() {
   }
 
   function salvar() {
-    if (nome && email === confirmarEmail && validarSenha(senha)) {
+    if (nome && nome.length <= 21 && email === confirmarEmail && validarSenha(senha)) {
       let usuarioRequest = {
         nome: nome,
         senha: senha,
@@ -35,14 +35,15 @@ export default function Cadastro() {
           alert('Email já em utilização');
         });
     } else {
-      if (email !== confirmarEmail) {
+      if (nome.length > 21) {
+        alert("O nome não pode conter mais de 20 caracteres.");
+      } else if (email !== confirmarEmail) {
         alert("Verifique o email digitado.");
       } else {
         alert("Por favor, preencha todos os campos corretamente.");
       }
     }
   }
-
   return (
     <section>
       <div className="form-box">

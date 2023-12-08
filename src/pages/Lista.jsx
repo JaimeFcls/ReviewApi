@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import './Lista.css';
 
 import MovieCard from '../components/MovieCard'; // Importe o componente MovieCard
 
@@ -22,7 +23,7 @@ const FavoritesPage = () => {
 
     return (
         <div>
-            <h1>Meus Favoritos</h1>
+            <h1 className='meusLista'>Meus Favoritos</h1>
             {favorites.map(movie => (
                 <MovieCard key={movie.id} movie={movie} />
             ))}

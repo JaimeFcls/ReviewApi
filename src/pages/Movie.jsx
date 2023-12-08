@@ -1,10 +1,9 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaReply } from "react-icons/fa";
+import { FaEdit, FaReply } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
-import { FaEdit } from "react-icons/fa";
-import axios from "axios";
 
 
 import "./Movie.css";
@@ -193,13 +192,18 @@ const Movie = () => {
       }
     }
   };
-  const addToFavorites = async () => {
+  const addToFavorites = async (movieId, usuarioId) => {
     try {
+      if (!movieId || !usuarioId) {
+        console.error('Erro: ID do filme ou ID do usuário não fornecido');
+        return;
+      }
+  
       const response = await axios.post('http://localhost:8082/api/lista', {
-        movieId: id,
-        usuarioId: user.id,
+        movieId: movieId,
+        usuarioId: usuarioId,
       });
-
+  
       if (response.status === 200) {
         alert('Filme adicionado aos favoritos!');
       } else {
@@ -235,7 +239,7 @@ const Movie = () => {
             <br />
             {user ? (
               <div>
-                 <button onClick={() => addToFavorites(movie.id)}>Adicionar aos favoritos</button>
+                 <button onClick={() => addToFavorites(movie.id, user.id)}>Adicionar aos favoritos</button>
               <form onSubmit={(event) => editingCommentId ? handleEditSubmit(event, editingCommentId) : handleCommentSubmit(event)}>
                 <textarea
                   className="comentario"
