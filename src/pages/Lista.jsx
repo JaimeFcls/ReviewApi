@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import './Lista.css';
 
 import MovieCard from '../components/MovieCard'; // Importe o componente MovieCard
 const moviesURL = import.meta.env.VITE_API;
@@ -50,11 +51,13 @@ const FavoritesPage = () => {
     }, []);
 
     return (
-        <div className='movies-container'>
+        <div>
             <h1 className='myFav'>Meus Favoritos</h1>
+        <div className='movies-container'>
             {movies.map((movie, index) => (
                 movie && <MovieCard key={favorites[index].id} movie={movie} />
             ))}
+        </div>
         </div>
     );
 };
