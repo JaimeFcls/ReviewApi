@@ -4,14 +4,17 @@ import { getUser } from "../components/getUser";
 import './Lista.css';
 
 import MovieCard from '../components/MovieCard'; // Importe o componente MovieCard
+import SeriesCard from '../components/SeriesCard';
 const moviesURL = import.meta.env.VITE_API;
 const defaultImageURL = './imagempadrao.png';
 
 const FavoritesPage = () => {
     const [favorites, setFavorites] = useState([]);
+    const [favorites2, setFavorites2] = useState([]);
     const [movies, setMovies] = useState([]);
+    const [series, setSeries] = useState([]);
 
-    const user = getUser(); // Obtenha o usuário logado
+    const user = getUser(); 
 
     const getMovie = async (movieId) => {
         const url = `https://api.themoviedb.org/3/movie/${movieId}`;
@@ -22,13 +25,23 @@ const FavoritesPage = () => {
             },
         });
         const data = await res.json();
-        if (!data.poster_path) {
-            data.poster_path = defaultImageURL;
-        }
+        
         console.log(data);
         return data;
     };
-
+    const getSerie = async (serieId) => {
+        const url = `https://api.themoviedb.org/3/tv/${serieId}`;
+        const res = await fetch(url, {
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8',
+            },
+        });
+        const data = await res.json();
+        console.log(data);
+        return data;
+    };
+    
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
@@ -52,6 +65,28 @@ const FavoritesPage = () => {
             }
         };
         fetchFavorites();
+        const fetchFavorites2 = async () => {
+            try {
+                const response = await axios.get('http://localhost:8082/api/lista');
+                if (response.status === 200) {
+                    const userFavorites2 = response.data.filter(favorite2 => favorite2.usuario && favorite2.usuario.id === user.id);
+                    setFavorites2(userFavorites2);
+                    const seriesData = await Promise.all(userFavorites2.map(async (favorite2) => {
+                        const serieId = favorite2.serieId;
+                        if (serieId) {
+                            return await getSerie(serieId);
+                        } else {
+                            console.log('movieId não encontrado na resposta da API');
+                            return null;
+                        }
+                    }));
+                    setSeries(seriesData);
+                }
+            } catch (error) {
+                console.error('Erro ao buscar favoritos', error);
+            }
+        };
+        fetchFavorites2();
     }, []);
 
     return (
@@ -62,6 +97,11 @@ const FavoritesPage = () => {
                 movie && <MovieCard key={favorites[index].id} movie={movie} />
             ))}
         </div>
+            <div className='series-container'>
+                {series.map((serie, index) => (
+                    serie && <SeriesCard key={favorites2[index].id} serie={serie} />
+                ))}
+            </div>
         </div>
     );
 };

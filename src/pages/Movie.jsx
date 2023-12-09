@@ -26,7 +26,7 @@ const Movie = () => {
   const [editingText, setEditingText] = useState("");
   const [isReplying, setIsReplying] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [listaId, setListaId] = useState(null); // Adicione esta linha
+  const [listaId, setListaId] = useState(null); 
 
   const handleReplyClick = (commentId) => {
     if (replyingTo === commentId) {

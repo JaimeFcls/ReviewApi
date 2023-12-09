@@ -4,6 +4,8 @@ import { FaReply } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
 import { FaEdit } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
 import "./Series.css";
 
 const seriesURL = import.meta.env.VITE_API_2;
@@ -20,6 +22,8 @@ const Series = () => {
     const [replyText, setReplyText] = useState("");
     const [editingCommentId, setEditingCommentId] = useState(null);
     const [editingText, setEditingText] = useState("");
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [listaId, setListaId] = useState(null); 
     const user = getUser();
 
     const handleReplyClick = (commentId) => {
@@ -181,11 +185,95 @@ const Series = () => {
         }
     }
     };
+    const addToFavorites = async (serieId, usuarioId) => {
+        try {
+            if (!serieId || !usuarioId) {
+                console.error('Erro: ID do série ou ID do usuário não fornecido');
+                return;
+            }
+
+            const response = await fetch('http://localhost:8082/api/lista', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    serieId: serieId.toString(),
+                    usuarioId: usuarioId.toString(),
+                }),
+            });
+
+            if (response.ok) {
+
+                const data = await response.json();
+                alert('série adicionado aos favoritos!');
+                window.location.reload();
+
+            } else {
+                console.error('Erro ao adicionar aos favoritos:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro ao adicionar aos favoritos:', error);
+        }
+    };
+    const checkFavorite = async (serieId, usuarioId) => {
+        try {
+            const response = await fetch(`http://localhost:8082/api/lista`);
+            if (response.ok) {
+                const data = await response.json();
+                return data.some(series => series.serieId === serieId && series.usuario.id === usuarioId);
+            } else {
+                console.error('Erro ao verificar favoritos:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro ao verificar favoritos:', error);
+        }
+        return false;
+    };
+    const getListaId = async (serieId, usuarioId) => {
+        try {
+            const response = await fetch(`http://localhost:8082/api/lista`);
+            if (response.ok) {
+                const data = await response.json();
+                const favorite = data.find(series => series.serieId === serieId && series.usuario.id === usuarioId);
+                return favorite ? favorite.id : null;
+            } else {
+                console.error('Erro ao obter o ID da lista:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro ao obter o ID da lista:', error);
+        }
+        return null;
+    };
+    const removeFromFavorites = async (listaId) => {
+        try {
+            if (!listaId) {
+                console.error('Erro: ID da lista não fornecido');
+                return;
+            }
+
+            const response = await fetch(`http://localhost:8082/api/lista/${listaId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert('série removido dos favoritos!');
+                window.location.reload();
+            } else {
+                console.error('Erro ao remover dos favoritos:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro ao remover dos favoritos:', error);
+        }
+    };
     useEffect(() => {
         const seriesUrl = `${seriesURL}${id}?language=pt-br`;
         getSeries(seriesUrl);
         getReplies();
-    }, []);
+        const user = getUser();
+        checkFavorite(id, user.id).then(setIsFavorite);
+        getListaId(id, user.id).then(setListaId);
+    }, [id, user.id, editingCommentId]);
     return (
         <div className="series-back">
             <img src={`https://image.tmdb.org/t/p/w500${series?.backdrop_path}`} alt="series backdrop" style={{ width: '1920px', height: '400px', opacity: "20%" }} />
@@ -199,6 +287,9 @@ const Series = () => {
                         <p>{series.overview}</p>
                         <br />
                         <p>Lançado em: {new Date(series.first_air_date).toLocaleDateString('pt-BR')}</p>
+                    </div>
+                    <div className="fav">
+                        {isFavorite ? <FaHeart style={{ width: '30px', height: '30px', color: ' #037cd8', cursor: 'pointer' }} onClick={() => removeFromFavorites(listaId)} /> : <FaRegHeart style={{ width: '30px', height: '30px', color: ' #037cd8', cursor: 'pointer' }} onClick={() => addToFavorites(series.id, user.id)} />}
                     </div>
                     <div className="comments">
                         <h3>Comentar</h3>
