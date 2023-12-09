@@ -299,8 +299,8 @@ const Movie = () => {
             <br />
             <p>Lançado em: {new Date(movie.release_date).toLocaleDateString('pt-BR')}</p>
           </div>
-          <div>
-            {isFavorite ? <FaHeart onClick={() => removeFromFavorites(listaId)} /> : <FaRegHeart onClick={() => addToFavorites(movie.id, user.id)} />}
+          <div className="fav">
+            {isFavorite ? <FaHeart style={{ width: '30px', height: '30px', color: ' #037cd8', cursor: 'pointer' }} onClick={() => removeFromFavorites(listaId)} /> : <FaRegHeart style={{ width: '30px', height: '30px', color: ' #037cd8', cursor: 'pointer' }} onClick={() => addToFavorites(movie.id, user.id)} />}
           </div>
           <div className="comments">
             <h3>Comentar</h3>
