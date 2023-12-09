@@ -3,6 +3,9 @@ import { FaEdit, FaReply } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
+
 
 
 import "./Movie.css";
@@ -22,7 +25,8 @@ const Movie = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [isReplying, setIsReplying] = useState(false);
-
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [listaId, setListaId] = useState(null); // Adicione esta linha
 
   const handleReplyClick = (commentId) => {
     if (replyingTo === commentId) {
@@ -210,8 +214,11 @@ const Movie = () => {
       });
   
       if (response.ok) {
+        
         const data = await response.json();
         alert('Filme adicionado aos favoritos!');
+        window.location.reload();
+
       } else {
         console.error('Erro ao adicionar aos favoritos:', response.statusText);
       }
@@ -219,13 +226,65 @@ const Movie = () => {
       console.error('Erro ao adicionar aos favoritos:', error);
     }
   };
+  const checkFavorite = async (movieId, usuarioId) => {
+    try {
+      const response = await fetch(`http://localhost:8082/api/lista`);
+      if (response.ok) {
+        const data = await response.json();
+        return data.some(movie => movie.movieId === movieId && movie.usuario.id === usuarioId);
+      } else {
+        console.error('Erro ao verificar favoritos:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao verificar favoritos:', error);
+    }
+    return false;
+  };
+  const getListaId = async (movieId, usuarioId) => {
+    try {
+      const response = await fetch(`http://localhost:8082/api/lista`);
+      if (response.ok) {
+        const data = await response.json();
+        const favorite = data.find(movie => movie.movieId === movieId && movie.usuario.id === usuarioId);
+        return favorite ? favorite.id : null;
+      } else {
+        console.error('Erro ao obter o ID da lista:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao obter o ID da lista:', error);
+    }
+    return null;
+  };
+  const removeFromFavorites = async (listaId) => {
+    try {
+      if (!listaId) {
+        console.error('Erro: ID da lista não fornecido');
+        return;
+      }
 
+      const response = await fetch(`http://localhost:8082/api/lista/${listaId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        alert('Filme removido dos favoritos!');
+        window.location.reload();
+      } else {
+        console.error('Erro ao remover dos favoritos:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao remover dos favoritos:', error);
+    }
+  };
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
     getMovie(movieUrl);
     getReplies();
     console.log(editingCommentId);
-  }, [editingCommentId]);
+    const user = getUser();
+    checkFavorite(id, user.id).then(setIsFavorite);
+    getListaId(id, user.id).then(setListaId);
+  }, [id, user.id, editingCommentId]);
   return (
     <div className="movie-back">
       <img src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`} alt="movie backdrop" style={{ width: '1920px', height: '400px', opacity: "20%" }} />
@@ -240,12 +299,15 @@ const Movie = () => {
             <br />
             <p>Lançado em: {new Date(movie.release_date).toLocaleDateString('pt-BR')}</p>
           </div>
+          <div>
+            {isFavorite ? <FaHeart onClick={() => removeFromFavorites(listaId)} /> : <FaRegHeart onClick={() => addToFavorites(movie.id, user.id)} />}
+          </div>
           <div className="comments">
             <h3>Comentar</h3>
             <br />
             {user ? (
               <div>
-                <button onClick={() => addToFavorites(movie.id, user.id)}>Adicionar aos favoritos</button>
+              
               <form onSubmit={(event) => editingCommentId ? handleEditSubmit(event, editingCommentId) : handleCommentSubmit(event)}>
                 <textarea
                   className="comentario"
