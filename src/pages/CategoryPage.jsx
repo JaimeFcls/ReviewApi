@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
-import "./MoviesGrid.css";
 import SideBarFilter from "../components/SideBarFilter";
+import "./MoviesGrid.css";
 
 const CategoryPage = () => {
     const [movies, setMovies] = useState([]);

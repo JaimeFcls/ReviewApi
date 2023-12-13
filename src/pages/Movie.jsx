@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { FaEdit, FaReply } from "react-icons/fa";
-import { FaRegTrashCan } from "react-icons/fa6";
+import { FaEdit, FaRegHeart, FaReply } from "react-icons/fa";
+import { FaHeart, FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa6";
 
 
 
@@ -304,14 +302,17 @@ const Movie = () => {
     }
   };
   useEffect(() => {
+    const user = getUser();
+    if (user && user.id) {
+      checkFavorite(id, user.id).then(setIsFavorite);
+      getListaId(id, user.id).then(setListaId);
+    }
+    
     const movieUrl = `${moviesURL}${id}?language=pt-br`;
     getMovie(movieUrl);
     getReplies();
     console.log(editingCommentId);
-    const user = getUser();
-    checkFavorite(id, user.id).then(setIsFavorite);
-    getListaId(id, user.id).then(setListaId);
-  }, [id, user.id, editingCommentId]);
+  }, [id, editingCommentId]);
   return (
     <div className="movie-back">
       <img src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`} alt="movie backdrop" style={{ width: '1920px', height: '400px', opacity: "20%" }} />

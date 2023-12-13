@@ -17,7 +17,7 @@ const FavoritesPage = () => {
     const user = getUser(); 
 
     const getMovie = async (movieId) => {
-        const url = `https://api.themoviedb.org/3/movie/${movieId}`;
+        const url = `https://api.themoviedb.org/3/movie/${movieId}?language=pt-br`;
         const res = await fetch(url, {
             headers: {
                 accept: 'application/json',
@@ -30,7 +30,7 @@ const FavoritesPage = () => {
         return data;
     };
     const getSerie = async (serieId) => {
-        const url = `https://api.themoviedb.org/3/tv/${serieId}`;
+        const url = `https://api.themoviedb.org/3/tv/${serieId}?language=pt-br`;
         const res = await fetch(url, {
             headers: {
                 accept: 'application/json',

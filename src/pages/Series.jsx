@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { FaReply } from "react-icons/fa";
+import { FaEdit, FaRegHeart, FaReply } from "react-icons/fa";
+import { FaHeart, FaRegTrashCan } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { getUser } from "../components/getUser";
-import { FaEdit } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa6";
 import "./Series.css";
 
 const seriesURL = import.meta.env.VITE_API_2;
@@ -296,13 +293,17 @@ const Series = () => {
         }
     };
     useEffect(() => {
+        const user = getUser();
+        if (user && user.id) {
+          checkFavorite(id, user.id).then(setIsFavorite);
+          getListaId(id, user.id).then(setListaId);
+        }
+        
         const seriesUrl = `${seriesURL}${id}?language=pt-br`;
         getSeries(seriesUrl);
         getReplies();
-        const user = getUser();
-        checkFavorite(id, user.id).then(setIsFavorite);
-        getListaId(id, user.id).then(setListaId);
-    }, [id, user.id, editingCommentId]);
+        console.log(editingCommentId);
+      }, [id, editingCommentId]);
     return (
         <div className="series-back">
             <img src={`https://image.tmdb.org/t/p/w500${series?.backdrop_path}`} alt="series backdrop" style={{ width: '1920px', height: '400px', opacity: "20%" }} />

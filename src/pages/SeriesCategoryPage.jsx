@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import SeriesCard from "../components/SeriesCard"; 
-import "./SeriesGrid.css"; 
+import SeriesCard from "../components/SeriesCard";
 import SideBarFilter from "../components/SideBarFilter";
+import "./SeriesGrid.css";
 const SeriesCategoryPage = () => {
     const [series, setSeries] = useState([]);
     const [genreName, setGenreName] = useState("");
@@ -27,7 +27,7 @@ const SeriesCategoryPage = () => {
             })
             .catch(err => console.error(err));
 
-        fetch(`https://api.themoviedb.org/3/discover/tv?with_genres=${categoryId}`, options)
+        fetch(`https://api.themoviedb.org/3/discover/tv?with_genres=${categoryId}?language=pt-br`, options)
             .then(response => response.json())
             .then(response => setSeries(response.results))
             .catch(err => console.error(err));
