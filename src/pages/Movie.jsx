@@ -301,6 +301,7 @@ const Movie = () => {
       console.error('Erro ao remover dos favoritos:', error);
     }
   };
+  
   useEffect(() => {
     const user = getUser();
     if (user && user.id) {
@@ -319,8 +320,10 @@ const Movie = () => {
       {movie && (
         <>
           <img className="movie-poster" src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`} alt="movie poster" />
+          
           <p className="movie-title">{movie.title}</p>
           <p className="tagline">{movie.tagline}</p>
+          
           <div className="sinopse">
             <h3>Sinopse</h3>
             <p>{movie.overview}</p>
