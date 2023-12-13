@@ -21,6 +21,9 @@ const Series = () => {
     const [replyingTo, setReplyingTo] = useState(null);
     const [replyText, setReplyText] = useState("");
     const [editingCommentId, setEditingCommentId] = useState(null);
+    const [editingReplyText, setEditingReplyText] = useState("");
+    const [editingReplyId, setEditingReplyId] = useState(null);
+    const [editingReply, setEditingReply] = useState(null);
     const [editingText, setEditingText] = useState("");
     const [isFavorite, setIsFavorite] = useState(false);
     const [listaId, setListaId] = useState(null); 
@@ -170,6 +173,32 @@ const Series = () => {
             console.error('Erro ao editar comentário:', response.statusText);
         }
     };
+    const handleReplyEditSubmit = async (event) => {
+        event.preventDefault();
+        if (!editingReplyId) {
+            console.error('Erro: editingReplyId é undefined');
+            return;
+        }
+        const response = await fetch(`http://localhost:8082/api/respostas/${editingReplyId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                usuarioId: user.id,
+                comentarioId: editingReply.comentario.id,
+                movieId: editingReply.movieId,
+                serieId: editingReply.serieId,
+                texto: editingReplyText,
+            }),
+        });
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            console.error('Erro ao editar resposta:', response.statusText);
+        }
+    };
+
     const handleReplyDelete = async (replyId) => {
         if (window.confirm('Tem certeza de que deseja excluir esta resposta?')){
         const response = await fetch(`http://localhost:8082/api/respostas/${replyId}`, {
@@ -332,14 +361,18 @@ const Series = () => {
                                     <FaReply />
                                 </div>
 
-                                {replyingTo === comment.id && (
-                                    <form onSubmit={(event) => handleReplySubmit(event, comment.id)}>
-                                        <div>
-                                            <h6 className="titleRespostas">Responder :</h6>
-                                        </div>
-                                        <textarea className="comentarioResposta" value={replyText} onChange={handleReplyChange} />
-                                        <button className="enviarResposta" type="submit">Enviar</button>
-                                    </form>
+                                {user ? (
+                                    replyingTo === comment.id || editingReplyId ? (
+                                        <form onSubmit={(event) => editingReplyId ? handleReplyEditSubmit(event, editingReply.id) : handleReplySubmit(event, comment.id)}>
+                                            <div>
+                                                <h6 className="titleRespostas">Responder :</h6>
+                                            </div>
+                                            <textarea className="comentarioResposta" value={editingReplyId ? editingReplyText : replyText} onChange={editingReplyId ? (event) => setEditingReplyText(event.target.value) : handleReplyChange} />
+                                            <button className="enviarResposta" type="submit">{editingReplyId ? "Salvar" : "Enviar"}</button>
+                                        </form>
+                                    ) : null
+                                ) : (
+                                    <p>Você precisa estar logado para responder. <a className="clique" href="/login">Clique aqui para entrar</a></p>
                                 )}
                                 <div>
                                     <h6 className="titleRespostas">Respostas :</h6>
@@ -357,7 +390,7 @@ const Series = () => {
                                                     <div className="lixeira2" onClick={() => handleReplyDelete(reply.id)}>
                                                         <FaRegTrashCan />
                                                     </div>
-                                                    <div className="Editar2">
+                                                    <div className="Editar2" onClick={() => { setEditingReplyId(reply.id); setEditingReply(reply); setEditingReplyText(reply.texto); }}>
                                                         <FaEdit />
                                                     </div>
                                                 </div>
