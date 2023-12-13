@@ -69,14 +69,14 @@ const FavoritesPage = () => {
             try {
                 const response = await axios.get('http://localhost:8082/api/lista');
                 if (response.status === 200) {
-                    const userFavorites2 = response.data.filter(favorite2 => favorite2.usuario && favorite2.usuario.id === user.id);
-                    setFavorites2(userFavorites2);
-                    const seriesData = await Promise.all(userFavorites2.map(async (favorite2) => {
+                    const userFavorites = response.data.filter(favorite2 => favorite2.usuario && favorite2.usuario.id === user.id);
+                    setFavorites2(userFavorites);
+                    const seriesData = await Promise.all(userFavorites.map(async (favorite2) => {
                         const serieId = favorite2.serieId;
                         if (serieId) {
                             return await getSerie(serieId);
                         } else {
-                            console.log('movieId não encontrado na resposta da API');
+                            console.log('serieId não encontrado na resposta da API');
                             return null;
                         }
                     }));
@@ -86,6 +86,7 @@ const FavoritesPage = () => {
                 console.error('Erro ao buscar favoritos', error);
             }
         };
+        fetchFavorites();
         fetchFavorites2();
     }, []);
 
@@ -95,13 +96,15 @@ const FavoritesPage = () => {
         <div className='movies-container'>
             {movies.map((movie, index) => (
                 movie && <MovieCard key={favorites[index].id} movie={movie} />
+                
             ))}
-        </div>
-            <div className='series-container'>
-                {series.map((serie, index) => (
-                    serie && <SeriesCard key={favorites2[index].id} serie={serie} />
+                {series.map((series, index) => (
+                    series && <SeriesCard key={favorites2[index].id} series={series} />
                 ))}
-            </div>
+                
+        </div>
+        
+           
         </div>
     );
 };
