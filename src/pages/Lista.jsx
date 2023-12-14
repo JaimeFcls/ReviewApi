@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { getUser } from "../components/getUser";
 import './Lista.css';
 
-import MovieCard from '../components/MovieCard'; // Importe o componente MovieCard
-import SeriesCard from '../components/SeriesCard';
+import MovieCard2 from '../components/MovieCard2'; // 
+import SeriesCard2 from '../components/SeriesCard2';
 const moviesURL = import.meta.env.VITE_API;
 const defaultImageURL = './imagempadrao.png';
 
@@ -95,11 +95,11 @@ const FavoritesPage = () => {
             <h1 className='myFav'>Meus Favoritos</h1>
         <div className='movies-container'>
             {movies.map((movie, index) => (
-                movie && <MovieCard key={favorites[index].id} movie={movie} />
+                movie && <MovieCard2 key={favorites[index].id} movie={movie} />
                 
             ))}
                 {series.map((series, index) => (
-                    series && <SeriesCard key={favorites2[index].id} series={series} />
+                    series && <SeriesCard2 key={favorites2[index].id} series={series} />
                 ))}
                 
         </div>
