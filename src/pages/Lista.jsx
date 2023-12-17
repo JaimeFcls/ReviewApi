@@ -45,7 +45,7 @@ const FavoritesPage = () => {
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
-                const response = await axios.get('http://localhost:8082/api/lista');
+                const response = await axios.get('http://0.tcp.sa.ngrok.io:16905/api/lista');
                 if (response.status === 200) {
                     const userFavorites = response.data.filter(favorite => favorite.usuario && favorite.usuario.id === user.id);
                     setFavorites(userFavorites);
@@ -67,7 +67,7 @@ const FavoritesPage = () => {
         fetchFavorites();
         const fetchFavorites2 = async () => {
             try {
-                const response = await axios.get('http://localhost:8082/api/lista');
+                const response = await axios.get('http://0.tcp.sa.ngrok.io:16905/api/lista');
                 if (response.status === 200) {
                     const userFavorites = response.data.filter(favorite2 => favorite2.usuario && favorite2.usuario.id === user.id);
                     setFavorites2(userFavorites);

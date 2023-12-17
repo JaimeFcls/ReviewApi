@@ -19,7 +19,7 @@ export default function Login() {
             data.append("email", email);
             data.append("senha", senha);
 
-            const response = await axios.post("http://localhost:8082/api/usuario/login", data, config);
+            const response = await axios.post("http://0.tcp.sa.ngrok.io:16905/api/usuario/login", data, config);
 
             if (response.status === 200) {
                 console.log("Autenticação bem-sucedida:", response.data);
