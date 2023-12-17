@@ -54,6 +54,7 @@ const Movie = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'any value' 
       },
       body: JSON.stringify({
         comentar: commentText,
@@ -75,6 +76,7 @@ const Movie = () => {
     const res = await fetch(url, {
       headers: {
         accept: 'application/json',
+        'ngrok-skip-browser-warning': 'any value' ,
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTFjM2JmZTU5NmZjMmJiMmQ1OWQwZDhiYWZlMTM2NyIsInN1YiI6IjY0ZGVhYjcyYjc3ZDRiMTEzZmM2MDVhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BwanTcyFlIRs3zxrfDXVXOCt6Cj2bH9AZSyUsNQgAv8',
       },
     });
@@ -100,6 +102,7 @@ const Movie = () => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'any value'
         },
       });
       if (response.ok) {
@@ -125,6 +128,7 @@ const Movie = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'any value'
       },
       body: JSON.stringify({
         comentar: editingText,
@@ -153,6 +157,7 @@ const Movie = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'any value'
       },
       body: JSON.stringify({
         usuarioId: user.id,
@@ -174,6 +179,7 @@ const Movie = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'any value'
       },
       body: JSON.stringify({
         texto: replyText,
@@ -191,8 +197,15 @@ const Movie = () => {
     }
   };
   const getReplies = async () => {
+
     try {
-      const response = await fetch(`http://0.tcp.sa.ngrok.io:16905/api/respostas`);
+
+      const response = await fetch(`http://0.tcp.sa.ngrok.io:16905/api/respostas`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'any value'
+        }
+      });
+
       if (response.ok) {
         const data = await response.json();
         console.log(data)
@@ -200,10 +213,12 @@ const Movie = () => {
       } else {
         console.error('Erro ao recuperar respostas:', response.statusText);
       }
+
     } catch (error) {
       console.error('Erro ao recuperar respostas:', error);
     }
-  };
+
+  }
 
   const handleReplyDelete = async (replyId) => {
     if (window.confirm('Tem certeza de que deseja excluir esta resposta?')) {
@@ -211,6 +226,7 @@ const Movie = () => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'any value'
         },
       });
       if (response.ok) {
@@ -231,6 +247,7 @@ const Movie = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'any value'
         },
         body: JSON.stringify({
           movieId: movieId.toString(),
@@ -253,7 +270,12 @@ const Movie = () => {
   };
   const checkFavorite = async (movieId, usuarioId) => {
     try {
-      const response = await fetch(`http://0.tcp.sa.ngrok.io:16905/api/lista`);
+
+      const response = await fetch(`http://0.tcp.sa.ngrok.io:16905/api/lista`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'any value'
+        }
+      });
       if (response.ok) {
         const data = await response.json();
         return data.some(movie => movie.movieId === movieId && movie.usuario.id === usuarioId);
@@ -267,7 +289,12 @@ const Movie = () => {
   };
   const getListaId = async (movieId, usuarioId) => {
     try {
-      const response = await fetch(`http://0.tcp.sa.ngrok.io:16905/api/lista`);
+
+      const response = await fetch(`http://0.tcp.sa.ngrok.io:16905/api/lista`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'any value'
+        }
+      });
       if (response.ok) {
         const data = await response.json();
         const favorite = data.find(movie => movie.movieId === movieId && movie.usuario.id === usuarioId);
@@ -289,6 +316,10 @@ const Movie = () => {
 
       const response = await fetch(`http://0.tcp.sa.ngrok.io:16905/api/lista/${listaId}`, {
         method: 'DELETE',
+        headers: {
+          
+          'ngrok-skip-browser-warning': 'any value'
+        },
       });
 
       if (response.ok) {
