@@ -28,7 +28,7 @@ export default function Cadastro() {
 
       axios.post("http://localhost:8082/api/usuario", usuarioRequest)
         .then((response) => {
-          alert('Cadastrado com sucesso.');
+          alert('Cadastrado com sucesso..');
           window.location.href = "/login"
         })
         .catch((error) => {
