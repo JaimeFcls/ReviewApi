@@ -158,15 +158,14 @@ const Movie = () => {
         usuarioId: user.id,
         comentarioId: editingReply.comentario.id,
         movieId: editingReply.movieId,
+        serieId: editingReply.serieId,
         texto: editingReplyText,
       }),
     });
-    const data = await response.json();
     if (response.ok) {
-      console.log('Resposta editada com sucesso:', data);
       window.location.reload();
     } else {
-      console.error('Erro ao editar resposta:', data);
+      console.error('Erro ao editar resposta:', response.statusText);
     }
   };
   const handleReplySubmit = async (event, commentId) => {
