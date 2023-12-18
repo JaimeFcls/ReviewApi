@@ -166,6 +166,7 @@ const Movie = () => {
     if (response.ok) {
       getReplies(); 
       setReplies(replies.map(reply => reply.id === editingReplyId ? data : reply));
+      window.location.reload();
     } else {
       console.error('Erro ao editar resposta:', response.statusText);
     }
