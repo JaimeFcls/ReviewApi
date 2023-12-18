@@ -26,7 +26,7 @@ export default function Cadastro() {
         email: email,
       };
 
-      axios.post("http://0.tcp.sa.ngrok.io:16905/api/usuario", usuarioRequest)
+      axios.post("https://xj7bbr8mnlpv.share.zrok.io/api/usuario", usuarioRequest)
         .then((response) => {
           alert('Cadastrado com sucesso..');
           window.location.href = "/login"
