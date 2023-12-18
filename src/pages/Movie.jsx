@@ -156,9 +156,7 @@ const Movie = () => {
       },
       body: JSON.stringify({
         usuarioId: user.id,
-        comentarioId: editingReply.comentario.id,
         movieId: editingReply.movieId,
-        serieId: editingReply.serieId,
         texto: editingReplyText,
       }),
     });
