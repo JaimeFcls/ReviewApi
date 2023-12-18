@@ -162,8 +162,9 @@ const Movie = () => {
         texto: editingReplyText,
       }),
     });
+    const data = await response.json();
     if (response.ok) {
-      window.location.reload();
+      setReplies(replies.map(reply => reply.id === editingReplyId ? data : reply));
     } else {
       console.error('Erro ao editar resposta:', response.statusText);
     }
