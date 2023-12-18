@@ -164,6 +164,7 @@ const Movie = () => {
     });
     const data = await response.json();
     if (response.ok) {
+      getReplies(); 
       setReplies(replies.map(reply => reply.id === editingReplyId ? data : reply));
     } else {
       console.error('Erro ao editar resposta:', response.statusText);
@@ -183,6 +184,7 @@ const Movie = () => {
       }),
     });
     if (response.ok) {
+      getReplies(); 
       const data = await response.json();
       setReplies([...replies, data]);
       setReplyText("");
@@ -215,6 +217,7 @@ const Movie = () => {
         },
       });
       if (response.ok) {
+        getReplies(); 
         setReplies(replies.filter(reply => reply.id !== replyId));
       } else {
         console.error('Erro ao excluir resposta:', response.statusText);
