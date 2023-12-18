@@ -161,10 +161,12 @@ const Movie = () => {
         texto: editingReplyText,
       }),
     });
+    const data = await response.json();
     if (response.ok) {
+      console.log('Resposta editada com sucesso:', data);
       window.location.reload();
     } else {
-      console.error('Erro ao editar resposta:', response.statusText);
+      console.error('Erro ao editar resposta:', data);
     }
   };
   const handleReplySubmit = async (event, commentId) => {
