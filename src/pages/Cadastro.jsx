@@ -28,11 +28,17 @@ export default function Cadastro() {
 
       axios.post("https://xj7bbr8mnlpv.share.zrok.io/api/usuario", usuarioRequest)
         .then((response) => {
-          alert('Cadastrado com sucesso..');
-          window.location.href = "/login"
+        
+          if (response.data.emailExists) {
+            alert('Email já em utilização');
+          } else {
+            alert('Cadastrado com sucesso..');
+            window.location.href = "/login"
+          }
         })
         .catch((error) => {
-          alert('Email já em utilização');
+          console.error(error);
+          alert('Ocorreu um erro ao tentar cadastrar o usuário');
         });
     } else {
       if (nome.length > 21) {
