@@ -38,7 +38,7 @@ export default function Cadastro() {
         })
         .catch((error) => {
           console.error(error);
-          alert('Ocorreu um erro ao tentar cadastrar o usuário');
+          alert('Email já em utilização');
         });
     } else {
       if (nome.length > 21) {
