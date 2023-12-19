@@ -26,7 +26,7 @@ export default function Cadastro() {
         email: email,
       };
 
-      axios.post("https://xj7bbr8mnlpv.share.zrok.io/api/usuario", usuarioRequest)
+      axios.post("https://xt4a713djcwo.share.zrok.io/api/usuario", usuarioRequest)
         .then((response) => {
         
           if (response.data.emailExists) {
