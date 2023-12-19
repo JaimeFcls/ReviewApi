@@ -197,7 +197,7 @@ const Series = () => {
     };
 
     const handleReplyDelete = async (replyId) => {
-        if (window.confirm('Tem certeza de que deseja excluir esta resposta?')){
+        
         const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/respostas/${replyId}`, {
             method: 'DELETE',
             headers: {
@@ -209,7 +209,7 @@ const Series = () => {
         } else {
             console.error('Erro ao excluir resposta:', response.statusText);
         }
-    }
+    
     };
     const addToFavorites = async (serieId, usuarioId) => {
         try {
