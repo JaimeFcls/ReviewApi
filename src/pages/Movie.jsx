@@ -92,10 +92,7 @@ const Movie = () => {
   const handleCommentDelete = async (commentId) => {
     if (window.confirm('Tem certeza de que deseja excluir este comentário? As respostas obtidas também serão excluidas')) {
       
-      const repliesToDelete = replies.filter(reply => reply.comentario?.id === commentId);
-      for (let reply of repliesToDelete) {
-        await handleReplyDelete(reply.id);
-      }
+      
       const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/comentar/${commentId}`, {
         method: 'DELETE',
         headers: {
