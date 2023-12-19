@@ -27,7 +27,7 @@ const SeriesCategoryPage = () => {
             })
             .catch(err => console.error(err));
 
-        fetch(`https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=pt-br&page=1&sort_by=popularity.desc&with_genres=${categoryId}`, options)
+        fetch(`https://api.themoviedb.org/3/discover/tv?with_genres=${categoryId}?language=pt-br`, options)
             .then(response => response.json())
             .then(response => setSeries(response.results))
             .catch(err => console.error(err));

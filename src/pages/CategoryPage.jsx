@@ -28,7 +28,7 @@ const CategoryPage = () => {
             })
             .catch(err => console.error(err));
 
-        fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-br&page=1&sort_by=popularity.desc&with_genres=${categoryId}`, options)
+        fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${categoryId}`, options)
             .then(response => response.json())
             .then(response => setMovies(response.results))
             .catch(err => console.error(err));
