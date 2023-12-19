@@ -44,7 +44,7 @@ export default function Profile() {
         return;
       }
       try {
-        const response = await axios.put(`https://xt4a713djcwo.share.zrok.io/api/usuario/${user.id}`, {
+        const response = await axios.put(`https://do6lwa1u9mxs.share.zrok.io/api/usuario/${user.id}`, {
           nome: finalNome,
           email: finalEmail,
           senha

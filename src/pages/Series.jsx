@@ -45,7 +45,7 @@ const Series = () => {
 
     const handleCommentSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetch('https://xt4a713djcwo.share.zrok.io/api/comentar', {
+        const response = await fetch('https://do6lwa1u9mxs.share.zrok.io/api/comentar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const Series = () => {
         console.log(data);
         setSeries(data);
 
-        const commentsRes = await fetch(`https://xt4a713djcwo.share.zrok.io/api/comentar/serie/${id}`);
+        const commentsRes = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/comentar/serie/${id}`);
         const commentsData = await commentsRes.json();
         setComments(commentsData);
     };
@@ -91,7 +91,7 @@ const Series = () => {
                 await handleReplyDelete(reply.id);
             }
         
-            const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/comentar/${commentId}`, {
+            const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/comentar/${commentId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ const Series = () => {
     };
     const handleReplySubmit = async (event, commentId) => {
         event.preventDefault();
-        const response = await fetch('https://xt4a713djcwo.share.zrok.io/api/respostas', {
+        const response = await fetch('https://do6lwa1u9mxs.share.zrok.io/api/respostas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ const Series = () => {
     };
     const getReplies = async () => {
         try {
-            const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/respostas`);
+            const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/respostas`);
             if (response.ok) {
                 const data = await response.json();
                 console.log(data)
@@ -153,7 +153,7 @@ const Series = () => {
             console.error('Erro: editingCommentId é undefined');
             return;
         }
-        const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/comentar/${editingCommentId}`, {
+        const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/comentar/${editingCommentId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -181,7 +181,7 @@ const Series = () => {
             console.error('Erro: editingReplyId é undefined');
             return;
         }
-        const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/respostas/${editingReplyId}`, {
+        const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/respostas/${editingReplyId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ const Series = () => {
 
     const handleReplyDelete = async (replyId) => {
         
-        const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/respostas/${replyId}`, {
+        const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/respostas/${replyId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -223,7 +223,7 @@ const Series = () => {
                 return;
             }
 
-            const response = await fetch('https://xt4a713djcwo.share.zrok.io/api/lista', {
+            const response = await fetch('https://do6lwa1u9mxs.share.zrok.io/api/lista', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -249,7 +249,7 @@ const Series = () => {
     };
     const checkFavorite = async (serieId, usuarioId) => {
         try {
-            const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/lista`);
+            const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/lista`);
             if (response.ok) {
                 const data = await response.json();
                 return data.some(series => series.serieId === serieId && series.usuario.id === usuarioId);
@@ -263,7 +263,7 @@ const Series = () => {
     };
     const getListaId = async (serieId, usuarioId) => {
         try {
-            const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/lista`);
+            const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/lista`);
             if (response.ok) {
                 const data = await response.json();
                 const favorite = data.find(series => series.serieId === serieId && series.usuario.id === usuarioId);
@@ -283,7 +283,7 @@ const Series = () => {
                 return;
             }
 
-            const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/lista/${listaId}`, {
+            const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/lista/${listaId}`, {
                 method: 'DELETE',
             });
 

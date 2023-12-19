@@ -50,7 +50,7 @@ const Movie = () => {
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch('https://xt4a713djcwo.share.zrok.io/api/comentar', {
+    const response = await fetch('https://do6lwa1u9mxs.share.zrok.io/api/comentar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const Movie = () => {
     console.log(data);
     setMovie(data);
 
-    const commentsRes = await fetch(`https://xt4a713djcwo.share.zrok.io/api/comentar/filme/${id}`);
+    const commentsRes = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/comentar/filme/${id}`);
     const commentsData = await commentsRes.json();
     setComments(commentsData);
   };
@@ -96,7 +96,7 @@ const Movie = () => {
       for (let reply of repliesToDelete) {
         await handleReplyDelete(reply.id);
       }
-      const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/comentar/${commentId}`, {
+      const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/comentar/${commentId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const Movie = () => {
       console.error('Erro: editingCommentId é undefined');
       return;
     }
-    const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/comentar/${editingCommentId}`, {
+    const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/comentar/${editingCommentId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ const Movie = () => {
       console.error('Erro: editingReplyId é undefined');
       return;
     }
-    const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/respostas/${editingReplyId}`, {
+    const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/respostas/${editingReplyId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ const Movie = () => {
   };
   const handleReplySubmit = async (event, commentId) => {
     event.preventDefault();
-    const response = await fetch('https://xt4a713djcwo.share.zrok.io/api/respostas', {
+    const response = await fetch('https://do6lwa1u9mxs.share.zrok.io/api/respostas', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -196,7 +196,7 @@ const Movie = () => {
   };
   const getReplies = async () => {
     try {
-      const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/respostas`);
+      const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/respostas`);
       if (response.ok) {
         const data = await response.json();
         console.log(data)
@@ -210,7 +210,7 @@ const Movie = () => {
   };
 
   const handleReplyDelete = async (replyId) => {
-    const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/respostas/${replyId}`, {
+    const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/respostas/${replyId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -230,7 +230,7 @@ const Movie = () => {
         return;
       }
   
-      const response = await fetch('https://xt4a713djcwo.share.zrok.io/api/lista', {
+      const response = await fetch('https://do6lwa1u9mxs.share.zrok.io/api/lista', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -256,7 +256,7 @@ const Movie = () => {
   };
   const checkFavorite = async (movieId, usuarioId) => {
     try {
-      const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/lista`);
+      const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/lista`);
       if (response.ok) {
         const data = await response.json();
         return data.some(movie => movie.movieId === movieId && movie.usuario.id === usuarioId);
@@ -270,7 +270,7 @@ const Movie = () => {
   };
   const getListaId = async (movieId, usuarioId) => {
     try {
-      const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/lista`);
+      const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/lista`);
       if (response.ok) {
         const data = await response.json();
         const favorite = data.find(movie => movie.movieId === movieId && movie.usuario.id === usuarioId);
@@ -290,7 +290,7 @@ const Movie = () => {
         return;
       }
 
-      const response = await fetch(`https://xt4a713djcwo.share.zrok.io/api/lista/${listaId}`, {
+      const response = await fetch(`https://do6lwa1u9mxs.share.zrok.io/api/lista/${listaId}`, {
         method: 'DELETE',
       });
 
